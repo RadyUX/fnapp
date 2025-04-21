@@ -1,3 +1,27 @@
-[gd_resource type="TileSet" format=3 uid="uid://dd3gdac3v0w7e"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dd3gdac3v0w7e"]
+
+[ext_resource type="Texture2D" uid="uid://h2dttxqsrlta" path="res://assets/walls.png" id="1_lorio"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o15ue"]
+texture = ExtResource("1_lorio")
+9:23/size_in_atlas = Vector2i(10, 7)
+9:23/0 = 0
+9:20/size_in_atlas = Vector2i(10, 3)
+9:20/0 = 0
+7:9/size_in_atlas = Vector2i(4, 4)
+7:9/0 = 0
+13:9/size_in_atlas = Vector2i(4, 4)
+13:9/0 = 0
+19:9/size_in_atlas = Vector2i(4, 4)
+19:9/0 = 0
+16:3/size_in_atlas = Vector2i(4, 4)
+16:3/0 = 0
+7:3/size_in_atlas = Vector2i(4, 4)
+7:3/0 = 0
+24:3/size_in_atlas = Vector2i(4, 4)
+24:3/0 = 0
+26:9/size_in_atlas = Vector2i(4, 4)
+26:9/0 = 0
 
 [resource]
+sources/1 = SubResource("TileSetAtlasSource_o15ue")

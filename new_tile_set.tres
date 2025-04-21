@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://comsj4mtrcu0o"]
 
-[ext_resource type="Texture2D" uid="uid://cmhqbn7jvarvd" path="res://Untitled - 2.png" id="1_e3020"]
+[ext_resource type="Texture2D" uid="uid://cmhqbn7jvarvd" path="res://assets/Untitled - 2.png" id="1_e3020"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujgj0"]
 resource_name = "carrelage"

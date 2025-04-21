@@ -1,0 +1,7 @@
+res://restaurant.tscn
+res://new_tile_set.tres
+res://walls.tres
+res://texture.tres
+res://scenes/restaurant.tscn
+res://scenes/player.tscn
+res://scenes/player.gd
