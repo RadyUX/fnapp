@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://wn5oq321yejd"]
+[gd_scene load_steps=11 format=3 uid="uid://wn5oq321yejd"]
 
 [ext_resource type="Texture2D" uid="uid://b2koymrw8jmsn" path="res://assets/idle 1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://manxeak6y6sf" path="res://scenes/player.gd" id="1_g2els"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bjg27no2mljco" path="res://assets/idle 2.png" id="3_smehm"]
 [ext_resource type="Texture2D" uid="uid://geosjux4d2gn" path="res://assets/walk right 2.png" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://ch6vli7rus0xb" path="res://assets/walk left 1.png" id="4_smehm"]
-[ext_resource type="Texture2D" uid="uid://cj1dpoxrk04lr" path="res://assets/idle left 2.png" id="4_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://dyf5m68rye2gc" path="res://assets/walk left 2.png" id="5_ur7pv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
@@ -16,17 +15,6 @@ height = 94.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tuyoq"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_fjrip")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_ur7pv")
-}],
-"loop": true,
-"name": &"idle_left",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_3vyb7")
@@ -82,5 +70,5 @@ shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"idle_left"
+animation = &"idle_right"
 autoplay = "idle_right"
