@@ -1,0 +1,25 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://comsj4mtrcu0o"]
+
+[ext_resource type="Texture2D" uid="uid://cmhqbn7jvarvd" path="res://Untitled - 2.png" id="1_e3020"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujgj0"]
+resource_name = "carrelage"
+texture = ExtResource("1_e3020")
+18:56/size_in_atlas = Vector2i(4, 4)
+18:56/0 = 0
+18:56/0/terrain_set = 0
+18:56/0/terrain = 0
+18:56/0/terrains_peering_bit/right_side = 0
+18:56/0/terrains_peering_bit/bottom_right_corner = 0
+18:56/0/terrains_peering_bit/bottom_side = 0
+18:56/0/terrains_peering_bit/bottom_left_corner = 0
+18:56/0/terrains_peering_bit/left_side = 0
+18:56/0/terrains_peering_bit/top_left_corner = 0
+18:56/0/terrains_peering_bit/top_side = 0
+18:56/0/terrains_peering_bit/top_right_corner = 0
+
+[resource]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "carrelage"
+terrain_set_0/terrain_0/color = Color(0.634154, 0.035905, 0.599496, 1)
+sources/1 = SubResource("TileSetAtlasSource_ujgj0")

@@ -1,0 +1,11 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1745238399
+assets.png::CompressedTexture2D::1103861516772194393::1745237179::1745237179::1::::<><><>0<>0<>652996edebd4f8e052c25b1823c2ab80<>res://.godot/imported/assets.png-4ca3b43d44c396451044519ea2dec14d.ctex::
+icon.svg::CompressedTexture2D/CompressedTexture2D::8233038043289231684::1744538276::1744538283::1::::<><><>0<>0<>5f6e6668c86e6e80f691279c60e2129f<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+new_tile_set.tres::TileSet::5781368231983213744::1744547490::0::1::::<><><>0<>0<><>::uid://cmhqbn7jvarvd::::res://Untitled - 2.png
+showstage.png::CompressedTexture2D::8090473729664530297::1745238399::1745238399::1::::<><><>0<>0<>e0c0bbc628ff0e4a62e141c595696acf<>res://.godot/imported/showstage.png-e3913fe4a9b051b58c9e05f07a4aeba5.ctex::
+texture.tres::TileSet::8921531204151727494::1745237166::0::1::::<><><>0<>0<><>::
+walls.png::CompressedTexture2D::547277220114189722::1745237021::1745237022::1::::<><><>0<>0<>cb1ff74c77f6b907f93828cab09e8acc<>res://.godot/imported/walls.png-c04d410442f6ce7c5383ee87e9bcd3a2.ctex::
+walls.tres::TileSet::7428000822836260404::1744967281::0::1::::<><><>0<>0<><>::
+restaurant.tscn::PackedScene::6131674384534331724::1744550532::0::1::::<><><>0<>0<><>::uid://comsj4mtrcu0o::::res://new_tile_set.tres
+Untitled - 2.png::CompressedTexture2D/CompressedTexture2D::5630532125673472897::1744543316::1744543316::1::::<><><>0<>0<>1af3ea3a05407bdf73b1f8685544fd7d<>res://.godot/imported/Untitled - 2.png-03da86f3f9307f16c52fefb5d96619bc.ctex::
