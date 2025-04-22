@@ -3,3 +3,12 @@ res://new_tile_set.tres
 res://walls.tres
 res://texture.tres
 res://scenes/player.tscn
+res://scenes/interacting_componenet.tscn
+res://scenes/oven.tscn
+res://scenes/oven.gd
+res://scenes/pizzacru.tscn
+res://scenes/pizzacuite.tscn
+res://scenes/pizzacru.gd
+res://scenes/interactable.gd
+res://scenes/interacting_componenet.gd
+res://scenes/detection_zone.gd
