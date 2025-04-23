@@ -35,7 +35,7 @@ size = Vector2(141.5, 140.25)
 radius = 143.562
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_frdq2"]
-size = Vector2(590, 67.5)
+size = Vector2(590, 107.5)
 
 [node name="Oven" type="StaticBody2D"]
 position = Vector2(7, -202)
@@ -63,7 +63,7 @@ collision_mask = 2
 script = ExtResource("5_vkw7c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
-position = Vector2(-185, 40.75)
+position = Vector2(-185, 20.75)
 shape = SubResource("RectangleShape2D_frdq2")
 
 [node name="pizzacru" parent="." instance=ExtResource("5_frdq2")]

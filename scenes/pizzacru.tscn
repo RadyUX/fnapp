@@ -4,11 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://bpimd5ul2j63e" path="res://assets/crue.png" id="1_t31ql"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t31ql"]
-radius = 42.0476
+radius = 59.0762
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 2
-collision_mask = 2
 script = ExtResource("1_qech1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

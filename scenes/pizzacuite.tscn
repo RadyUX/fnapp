@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcin0e7lm72cf"]
+[gd_scene load_steps=4 format=3 uid="uid://bcin0e7lm72cf"]
 
+[ext_resource type="Script" uid="uid://bc05xyma5euwi" path="res://scenes/pizzacuite.gd" id="1_8qtip"]
 [ext_resource type="Texture2D" uid="uid://dt0ts31f8smep" path="res://assets/cuite.png" id="1_u02br"]
 
-[node name="Sprite2D" type="Sprite2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ryvh"]
+radius = 108.074
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_8qtip")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_u02br")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-32, -34)
+shape = SubResource("CircleShape2D_3ryvh")

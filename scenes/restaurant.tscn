@@ -36,8 +36,5 @@ position = Vector2(457, 392)
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="Oven2" parent="." instance=ExtResource("5_50xnb")]
-position = Vector2(738, 291)
-
-[node name="Oven" parent="." instance=ExtResource("5_50xnb")]
+[node name="Oven" parent="." groups=["oven"] instance=ExtResource("5_50xnb")]
 position = Vector2(559, 289)
