@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=4 uid="uid://ctmh1te22faau"]
 
-[ext_resource type="TileSet" uid="uid://comsj4mtrcu0o" path="res://new_tile_set.tres" id="1_mtvav"]
-[ext_resource type="TileSet" uid="uid://dd3gdac3v0w7e" path="res://walls.tres" id="2_v3g5v"]
-[ext_resource type="TileSet" uid="uid://d0dwkyxv02e6q" path="res://texture.tres" id="3_pp8ob"]
+[ext_resource type="TileSet" uid="uid://comsj4mtrcu0o" path="res://scenes/restaurant/carrelage.tres" id="1_mtvav"]
+[ext_resource type="TileSet" uid="uid://dd3gdac3v0w7e" path="res://scenes/restaurant/walls.tres" id="2_v3g5v"]
+[ext_resource type="TileSet" uid="uid://d0dwkyxv02e6q" path="res://scenes/restaurant/texture.tres" id="3_pp8ob"]
 
 [node name="Resataurant" type="Node2D"]
 

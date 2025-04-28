@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw2he6humnj7a"]
+
+[ext_resource type="Script" uid="uid://ckvmu1lkux3yh" path="res://scenes/interactables/pizzacru.gd" id="1_nqgrd"]
+[ext_resource type="Texture2D" uid="uid://bpimd5ul2j63e" path="res://assets/crue.png" id="2_ij0lu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t31ql"]
+radius = 59.0762
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_nqgrd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ij0lu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-31, -32)
+shape = SubResource("CircleShape2D_t31ql")

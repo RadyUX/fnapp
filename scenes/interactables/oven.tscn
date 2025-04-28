@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://bvogly4j5fhun"]
+
+[ext_resource type="Texture2D" uid="uid://btwifswvtahj0" path="res://assets/Untitled - 4.png" id="1_iwkwo"]
+[ext_resource type="Script" uid="uid://guhtkg0oh0be" path="res://scenes/interactables/oven.gd" id="1_pgb8s"]
+[ext_resource type="PackedScene" uid="uid://b6afvyi7j5p5q" path="res://scenes/interactables/interactable.tscn" id="2_nrxlc"]
+[ext_resource type="PackedScene" uid="uid://dw2he6humnj7a" path="res://scenes/interactables/pizzacru.tscn" id="5_frdq2"]
+[ext_resource type="Script" uid="uid://b2vf4kwm5yyj0" path="res://scenes/interactables/detection_zone.gd" id="5_vkw7c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgb8s"]
+atlas = ExtResource("1_iwkwo")
+region = Rect2(0, 326, 152, 154)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1wc2"]
+atlas = ExtResource("1_iwkwo")
+region = Rect2(0, 172, 152, 154)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c6yvy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgb8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1wc2")
+}],
+"loop": true,
+"name": &"cook",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmeba"]
+size = Vector2(141.5, 140.25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1wc2"]
+radius = 143.562
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frdq2"]
+size = Vector2(590, 67.5)
+
+[node name="Oven" type="StaticBody2D"]
+position = Vector2(7, -202)
+script = ExtResource("1_pgb8s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(353, 457)
+sprite_frames = SubResource("SpriteFrames_c6yvy")
+animation = &"cook"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(350, 463.875)
+shape = SubResource("RectangleShape2D_lmeba")
+
+[node name="interacteble" parent="." instance=ExtResource("2_nrxlc")]
+interact_name = "cook the pizza"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interacteble"]
+position = Vector2(350, 466)
+shape = SubResource("CircleShape2D_m1wc2")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+position = Vector2(318, 708)
+collision_mask = 2
+script = ExtResource("5_vkw7c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+position = Vector2(-185, 40.75)
+shape = SubResource("RectangleShape2D_frdq2")
+
+[node name="pizzacru" parent="." instance=ExtResource("5_frdq2")]
+position = Vector2(263, 723)
+
+[connection signal="area_entered" from="DetectionZone" to="." method="_on_pizzadetector_area_entered"]
+[connection signal="area_exited" from="DetectionZone" to="." method="_on_pizzadetector_area_exited"]

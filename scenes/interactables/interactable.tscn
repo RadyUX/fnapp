@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6afvyi7j5p5q"]
+
+[ext_resource type="Script" uid="uid://cj713jbklbhb1" path="res://scenes/interactables/interactable.gd" id="1_56v82"]
+
+[node name="Oven" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_56v82")

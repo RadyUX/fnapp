@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8pol2hi57uhi"]
+
+[ext_resource type="Script" uid="uid://clylldhbiv4qp" path="res://scenes/customers/Customers.gd" id="1_y5hdc"]
+[ext_resource type="Texture2D" uid="uid://dqt2p753u8lem" path="res://assets/npc_boy 1.png" id="2_f517g"]
+[ext_resource type="Texture2D" uid="uid://dtdwkk32srhvv" path="res://assets/npc_boy2.png" id="3_mp505"]
+[ext_resource type="Texture2D" uid="uid://bmia460vete2i" path="res://assets/npc_girl 1.png" id="4_4jawt"]
+[ext_resource type="Texture2D" uid="uid://b2rl41qemtwyc" path="res://assets/npc_girl 2.png" id="5_23u41"]
+[ext_resource type="Script" uid="uid://sj656q0n8gwc" path="res://scenes/customers/idle.gd" id="6_f517g"]
+[ext_resource type="Script" uid="uid://cqm8wmrp5oiuu" path="res://scenes/customers/Walk.cs" id="7_mp505"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pm32s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f517g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mp505")
+}],
+"loop": true,
+"name": &"npc_boy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_4jawt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_23u41")
+}],
+"loop": true,
+"name": &"npc_girl",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mp505"]
+radius = 50.01
+
+[node name="Customer" type="CharacterBody2D"]
+script = ExtResource("1_y5hdc")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-363, 970)
+scale = Vector2(0.570707, 0.570707)
+sprite_frames = SubResource("SpriteFrames_pm32s")
+animation = &"npc_boy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-364, 977)
+shape = SubResource("CircleShape2D_mp505")
+
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_f517g")
+
+[node name="Walk" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("Character", "NavAgent", "AnimatedSprite")]
+script = ExtResource("7_mp505")
+Character = NodePath("../..")
+NavAgent = NodePath("../../NavigationAgent2D")
+AnimatedSprite = NodePath("../../AnimatedSprite2D")
