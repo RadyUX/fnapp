@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://wn5oq321yejd"]
+[gd_scene load_steps=14 format=3 uid="uid://wn5oq321yejd"]
 
 [ext_resource type="Texture2D" uid="uid://b2koymrw8jmsn" path="res://assets/idle 1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://manxeak6y6sf" path="res://scenes/player.gd" id="1_g2els"]
@@ -64,11 +64,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y4r1p"]
+radius = 44.7772
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 42.0
 height = 144.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
+collision_layer = 3
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_g2els")
 
@@ -79,11 +84,20 @@ sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"idle_left"
 autoplay = "idle_right"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="InteractionZone" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone"]
+position = Vector2(13, 22)
+shape = SubResource("CircleShape2D_y4r1p")
+debug_color = Color(0.950577, 0.217583, 0.129393, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(16, 20)
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="interactingComponenet" parent="CollisionShape2D" instance=ExtResource("10_y4r1p")]
-position = Vector2(-4, -76)
+position = Vector2(-5, -88)
 
 [node name="StateMachine" type="Node" parent="."]

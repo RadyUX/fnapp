@@ -4,24 +4,34 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o15ue"]
 texture = ExtResource("1_lorio")
-9:23/size_in_atlas = Vector2i(10, 7)
-9:23/0 = 0
 9:20/size_in_atlas = Vector2i(10, 3)
 9:20/0 = 0
+9:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-81, -24, 80, -24, 79, 23, -79, 23)
 7:9/size_in_atlas = Vector2i(4, 4)
 7:9/0 = 0
+7:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29.3526, -32.7395, 29.3526, -31.0461, 31.6105, 29.9171, -32.7395, 32.175, -31.0461, -32.7395)
 13:9/size_in_atlas = Vector2i(4, 4)
 13:9/0 = 0
+13:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29.9171, -31.0461, 30.4816, -30.4816, 30.4816, 30.4816, -30, 30)
 19:9/size_in_atlas = Vector2i(4, 4)
 19:9/0 = 0
+19:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29.9171, -31.0461, 30.4816, -29.9171, 30.4816, 28.7882, -31.0461, 29.9171, -30.4816, -25.9658)
 16:3/size_in_atlas = Vector2i(4, 4)
 16:3/0 = 0
+16:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-31.6105, -33.8684, 29.9171, -33.8684, 31.0461, 28.7882, -30.4816, 29.9171)
 7:3/size_in_atlas = Vector2i(4, 4)
 7:3/0 = 0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-31, -32, 29, -32, 29, 24, -33, 29)
 24:3/size_in_atlas = Vector2i(4, 4)
 24:3/0 = 0
+24:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-31.0461, -32.7395, 30.4816, -32.7395, 32.175, 27.0947, -29.9171, 33.304)
 26:9/size_in_atlas = Vector2i(4, 4)
 26:9/0 = 0
+26:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-30.4816, -31.6105, 31.6105, -30.4816, 30.4816, 30.4816, -31.6105, 32.175, -29.9171, -27.0947)
+9:23/size_in_atlas = Vector2i(10, 7)
+9:23/0 = 0
+9:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-78, -54, -79, 55, 81, 57, 76, -57)
 
 [resource]
+physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_o15ue")

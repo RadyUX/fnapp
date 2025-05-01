@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckg0jk58nb5ix"]
+
+[ext_resource type="Script" uid="uid://vh31kthj3myq" path="res://scenes/zone/spawn_zone.gd" id="1_taxf2"]
+[ext_resource type="PackedScene" uid="uid://c8pol2hi57uhi" path="res://scenes/customers/Customer.tscn" id="2_muc2a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_taxf2"]
+size = Vector2(176, 58)
+
+[node name="SpawnZone" type="Node2D"]
+script = ExtResource("1_taxf2")
+customer_scene = ExtResource("2_muc2a")
+
+[node name="spawnArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spawnArea"]
+position = Vector2(78, 0)
+shape = SubResource("RectangleShape2D_taxf2")
+debug_color = Color(1, 0.0105898, 0.0277033, 0.42)
+
+[node name="spawnTimer" type="Timer" parent="."]

@@ -1,4 +1,5 @@
-extends Area2D
+extends Node
+
 
 
 @export var is_interactable: bool = true

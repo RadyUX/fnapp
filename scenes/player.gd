@@ -12,8 +12,12 @@ var state = PlayerState.IDLE
 var speed = 160
 var last_direction = "right" 
 
-func _ready():
-	pass
+var carried_item_name: String = ""
+
+
+@onready var inventory = load("res://scripts/Inventory.cs")
+
+
 	
 	
 func _process(delta):
@@ -37,3 +41,4 @@ func _process(delta):
 		$AnimatedSprite2D.play("idle_" + last_direction)
 
 	move_and_slide()
+	

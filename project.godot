@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 Inventory="*res://scripts/Inventory.cs"
+GameManager="*res://scripts/core/GameManager.cs"
 
 [display]
 
@@ -57,6 +58,7 @@ interact={
 
 [layer_names]
 
+2d_physics/layer_1="walls"
 2d_physics/layer_2="interactions"
 
 [rendering]
