@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://brqhm2vsgvgyu"]
+[gd_scene load_steps=4 format=3 uid="uid://brqhm2vsgvgyu"]
 
 [ext_resource type="Script" uid="uid://ch03skwqefhkd" path="res://scenes/ui/panel_container.gd" id="1_p0ay3"]
 [ext_resource type="PackedScene" uid="uid://dfm8w18qx8na3" path="res://scenes/ui/Itemslot.tscn" id="2_jywan"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jywan"]
+bg_color = Color(0.054902, 0.0666667, 0.160784, 1)
 
 [node name="InventoryUi" type="CanvasLayer"]
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 offset_right = 166.0
 offset_bottom = 66.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jywan")
 script = ExtResource("1_p0ay3")
 item_slot_scene = ExtResource("2_jywan")
 

@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 Inventory="*res://scripts/Inventory.cs"
 GameManager="*res://scripts/core/GameManager.cs"
+GameStats="*res://scripts/core/GameStats.cs"
 
 [display]
 

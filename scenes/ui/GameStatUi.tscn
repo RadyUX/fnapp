@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://yo7pkkfsipu2"]
+
+[ext_resource type="Script" uid="uid://s4yunyc48clu" path="res://scenes/ui/game_stat_ui.gd" id="1_en5h1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_en5h1"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.054902, 0.0666667, 0.160784, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_en5h1"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_wed6j"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_g7h3j"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_rfedo"]
+font_size = 30
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_en5h1")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 832.0
+offset_top = -3.0
+offset_right = 1159.0
+offset_bottom = 193.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_en5h1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.017
+offset_top = 7.0
+offset_right = 294.441
+offset_bottom = 191.0
+
+[node name="LabelMoney" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "*"
+label_settings = SubResource("LabelSettings_en5h1")
+
+[node name="LabelEntertainement" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_wed6j")
+
+[node name="LabelSafety" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_g7h3j")
+
+[node name="LabelPopularity" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "test"
+label_settings = SubResource("LabelSettings_rfedo")

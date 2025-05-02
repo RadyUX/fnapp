@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bnpokhgwn0njq"]
+[gd_scene load_steps=12 format=4 uid="uid://bnpokhgwn0njq"]
 
 [ext_resource type="Script" uid="uid://s808k7lnid1f" path="res://scenes/restaurant/restaurant.gd" id="1_iicbp"]
 [ext_resource type="TileSet" uid="uid://comsj4mtrcu0o" path="res://scenes/restaurant/carrelage.tres" id="2_d4a0i"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://wn5oq321yejd" path="res://scenes/player.tscn" id="7_8iurx"]
 [ext_resource type="PackedScene" uid="uid://ckg0jk58nb5ix" path="res://scenes/zone/SpawnZone.tscn" id="8_d4a0i"]
 [ext_resource type="PackedScene" uid="uid://brqhm2vsgvgyu" path="res://scenes/ui/InventoryUI.tscn" id="9_55vef"]
+[ext_resource type="PackedScene" uid="uid://yo7pkkfsipu2" path="res://scenes/ui/GameStatUi.tscn" id="10_2tehs"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_iicbp"]
 vertices = PackedVector2Array(-2394.94, -610.031, 1144, -622.961, 1144, 590, 535, 590, -2386.05, 1014.04, 535, 936.539, 372.453, 945.508, 368.469, 1026.95)
@@ -60,3 +61,5 @@ position = Vector2(473, 85)
 spawn_limit = 10
 
 [node name="InventoryUi" parent="." instance=ExtResource("9_55vef")]
+
+[node name="GameStatUi" parent="." instance=ExtResource("10_2tehs")]
