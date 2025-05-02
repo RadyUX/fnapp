@@ -104,4 +104,12 @@ public partial class GameStats : Node
 	public int money => Money;
 	public int safety => Safety;
 	public int entertainment => Entertainment;
+
+		// === Méthodes accessibles depuis GDScript ===
+	public void add_profit(int amount) => AddProfit(amount);
+	public void spend_money(int amount) => SpendMoney(amount);
+	public void add_entertainment(int value) => AddEntertainment(value);
+	public void apply_tax() => ApplyTax();
+	public void reset_day_stats() => ResetDayStats();
+
 }

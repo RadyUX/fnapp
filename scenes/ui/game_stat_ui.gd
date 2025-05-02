@@ -7,6 +7,6 @@ extends CanvasLayer
 
 func _process(delta):
 	label_popularity.text = "⭐ Popularité : " + str(GameStats.popularity)
-	label_money.text = "💵 Argent : " + str(GameStats.money)
+	label_money.text = "💵 Argent : " + str(GameStats.money) + "$"
 	label_safety.text = "🔐 Sécurité : " + str(GameStats.safety) + "%"
 	label_entertainement.text = "🎉 Divertissement : " + str(GameStats.entertainment)

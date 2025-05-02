@@ -52,7 +52,9 @@ func receive_item(item_name: String, inventory: Inventory):
 		return
 
 	print("🍕 Merci pour la commande !")
-
+	print("donne argent")
+	var total_gain = request_quantity * 3
+	GameStats.add_profit(total_gain)
 	# Enlève les items maintenant
 	for i in range(request_quantity):
 		inventory.RemoveItem(item_name)

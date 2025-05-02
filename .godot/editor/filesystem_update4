@@ -19,3 +19,4 @@ res://scenes/customers/StateMachine.cs
 res://scripts/core/GameStats.cs
 res://scenes/ui/GameStatUi.tscn
 res://scenes/ui/game_stat_ui.gd
+res://scenes/customers/Customers.gd
