@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfm8w18qx8na3"]
+
+[ext_resource type="Texture2D" uid="uid://dt0ts31f8smep" path="res://assets/cuite.png" id="1_1qtrn"]
+[ext_resource type="Script" uid="uid://don6vmpfja2sr" path="res://scenes/ui/itemslot.gd" id="1_b3d6h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b3d6h"]
+font_size = 27
+
+[sub_resource type="LabelSettings" id="LabelSettings_4b3b5"]
+font_size = 28
+
+[node name="Hbox" type="HBoxContainer" node_paths=PackedStringArray("item_icon", "item_quantity", "item_name")]
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 1118.0
+offset_bottom = 477.0
+script = ExtResource("1_b3d6h")
+item_icon = NodePath("itemIcon")
+item_quantity = NodePath("itemName")
+item_name = NodePath("itemQuantity")
+
+[node name="itemIcon" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+texture = ExtResource("1_1qtrn")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="itemName" type="Label" parent="."]
+layout_mode = 2
+text = "PIZZA CUITE"
+label_settings = SubResource("LabelSettings_b3d6h")
+
+[node name="itemQuantity" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_4b3b5")

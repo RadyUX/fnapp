@@ -2,6 +2,8 @@ extends Area2D
 
 @export var is_interactable: bool = true
 @export var interact_name: String = "Ramasser pizza cuite"
+var inventory = Inventory 
+
 
 var interact: Callable = func():
 	pass
@@ -12,7 +14,7 @@ func _ready():
 
 	interact = func():
 		print("🧺 Pizza ramassée")
-		Inventory.AddItem("pizza_cuite")
+		Inventory.AddItem("pizza_cuite")  # ✅ Correct
 		queue_free()
 
 		# 🔍 Cherche tous les fours dans la scène

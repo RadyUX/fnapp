@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://brqhm2vsgvgyu"]
+
+[ext_resource type="Script" uid="uid://ch03skwqefhkd" path="res://scenes/ui/panel_container.gd" id="1_p0ay3"]
+[ext_resource type="PackedScene" uid="uid://dfm8w18qx8na3" path="res://scenes/ui/Itemslot.tscn" id="2_jywan"]
+
+[node name="InventoryUi" type="CanvasLayer"]
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 166.0
+offset_bottom = 66.0
+script = ExtResource("1_p0ay3")
+item_slot_scene = ExtResource("2_jywan")
+
+[node name="ItemList" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2

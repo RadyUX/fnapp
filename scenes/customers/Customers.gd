@@ -59,8 +59,7 @@ func receive_item(item_name: String, inventory: Inventory):
 
 	print("🧺 Pizza donnée.")
 
-	# ❌ Ne redéfinis pas interact ici !
-	# ✅ Tue le NPC tout de suite
+
 	$cash_sound.play()
 	await $cash_sound.finished
 	queue_free()
