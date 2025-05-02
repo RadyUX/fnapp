@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1ns87l4tsgcy"]
+
+[ext_resource type="Script" uid="uid://cir85wf1b0svs" path="res://scenes/day_and_night_cycle_component.gd" id="1_bvsb5"]
+
+[node name="DayAndNightCycleComponent" type="CanvasModulate"]
+script = ExtResource("1_bvsb5")

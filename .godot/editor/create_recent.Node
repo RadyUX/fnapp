@@ -1,8 +1,11 @@
+CanvasModulate
+Node2D
+CanvasLayer
+Label
+MarginContainer
+PanelContainer
 Panel
 VBoxContainer
-Label
-CanvasLayer
-PanelContainer
 HBoxContainer
 TextureRect
 AudioStreamPlayer2D
@@ -10,6 +13,3 @@ CollisionShape2D
 Area2D
 Control
 Timer
-Node2D
-CharacterBody2D
-NavigationAgent2D

@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://beaxjeds6qynl"]
+
+[ext_resource type="Texture2D" uid="uid://denf23ckh2e" path="res://assets/panel.png" id="1_qs1nn"]
+[ext_resource type="Script" uid="uid://dpoex50g6di5j" path="res://scenes/ui/day_and_night_panel.gd" id="2_kp344"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kp344"]
+atlas = ExtResource("1_qs1nn")
+region = Rect2(77, 187.5, 309, 134)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jplqh"]
+texture = SubResource("AtlasTexture_kp344")
+region_rect = Rect2(-5.00006, 2.64999, 311.3, 129.8)
+
+[sub_resource type="Theme" id="Theme_uvvv5"]
+DayAndNightPanel/base_type = &"PanelContainer"
+DayAndNightPanel/styles/panel = SubResource("StyleBoxTexture_jplqh")
+
+[sub_resource type="LabelSettings" id="LabelSettings_0wqhh"]
+font_size = 39
+
+[node name="DayAndNightPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 439.0
+offset_right = -545.0
+offset_bottom = -541.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_uvvv5")
+script = ExtResource("2_kp344")
+
+[node name="DayPanel" type="PanelContainer" parent="."]
+offset_left = -11.0
+offset_right = 165.0
+offset_bottom = 101.0
+theme_type_variation = &"DayAndNightPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="DayPanel"]
+layout_mode = 2
+
+[node name="DayLabel" type="Label" parent="DayPanel/MarginContainer"]
+layout_mode = 2
+text = "DAY 0"
+label_settings = SubResource("LabelSettings_0wqhh")
+horizontal_alignment = 1
+
+[node name="TimePanel" type="PanelContainer" parent="."]
+offset_left = -11.0
+offset_top = 110.0
+offset_right = 165.0
+offset_bottom = 211.0
+theme_type_variation = &"DayAndNightPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="TimePanel"]
+layout_mode = 2
+
+[node name="TimeLabel" type="Label" parent="TimePanel/MarginContainer"]
+layout_mode = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_0wqhh")
+horizontal_alignment = 1

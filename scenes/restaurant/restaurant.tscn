@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=4 uid="uid://bnpokhgwn0njq"]
+[gd_scene load_steps=16 format=4 uid="uid://bnpokhgwn0njq"]
 
 [ext_resource type="Script" uid="uid://s808k7lnid1f" path="res://scenes/restaurant/restaurant.gd" id="1_iicbp"]
+[ext_resource type="PackedScene" uid="uid://1ns87l4tsgcy" path="res://scenes/DayAndNightCycleComponent.tscn" id="2_6whu3"]
 [ext_resource type="TileSet" uid="uid://comsj4mtrcu0o" path="res://scenes/restaurant/carrelage.tres" id="2_d4a0i"]
 [ext_resource type="TileSet" uid="uid://dd3gdac3v0w7e" path="res://scenes/restaurant/walls.tres" id="3_55vef"]
 [ext_resource type="TileSet" uid="uid://d0dwkyxv02e6q" path="res://scenes/restaurant/texture.tres" id="4_2tehs"]
@@ -10,6 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://ckg0jk58nb5ix" path="res://scenes/zone/SpawnZone.tscn" id="8_d4a0i"]
 [ext_resource type="PackedScene" uid="uid://brqhm2vsgvgyu" path="res://scenes/ui/InventoryUI.tscn" id="9_55vef"]
 [ext_resource type="PackedScene" uid="uid://yo7pkkfsipu2" path="res://scenes/ui/GameStatUi.tscn" id="10_2tehs"]
+[ext_resource type="PackedScene" uid="uid://beaxjeds6qynl" path="res://scenes/ui/DayAndNightPanel.tscn" id="11_6a52p"]
+
+[sub_resource type="Gradient" id="Gradient_6whu3"]
+offsets = PackedFloat32Array(0.0178571, 0.125, 0.208333, 0.285714, 1)
+colors = PackedColorArray(0.0701527, 0.30795, 0.999995, 1, 0.272922, 0.355452, 0.978657, 1, 0.363894, 0.473935, 0.984392, 1, 0.612977, 0.64349, 0.93392, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8iurx"]
+gradient = SubResource("Gradient_6whu3")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_iicbp"]
 vertices = PackedVector2Array(-2394.94, -610.031, 1144, -622.961, 1144, 590, 535, 590, -2386.05, 1014.04, 535, 936.539, 372.453, 945.508, 368.469, 1026.95)
@@ -17,6 +26,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 
 [node name="Restaurant" type="Node2D"]
 script = ExtResource("1_iicbp")
+
+[node name="DayAndNightCycleComponent" parent="." instance=ExtResource("2_6whu3")]
+day_night_gradient_texture = SubResource("GradientTexture1D_8iurx")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAQABsAAQASADgAAAAUABsAAQASADgAAAAYABsAAQASADgAAAAcABsAAQASADgAAAACACYAAQASADgAAAAgABsAAQASADgAAAA=")
@@ -63,3 +75,11 @@ spawn_limit = 10
 [node name="InventoryUi" parent="." instance=ExtResource("9_55vef")]
 
 [node name="GameStatUi" parent="." instance=ExtResource("10_2tehs")]
+
+[node name="DayPanel" type="CanvasLayer" parent="."]
+
+[node name="DayAndNightPanel" parent="DayPanel" instance=ExtResource("11_6a52p")]
+offset_left = 977.0
+offset_top = 370.0
+offset_right = 977.0
+offset_bottom = 370.0

@@ -12,13 +12,33 @@ func _ready():
 	randomize()
 	spawn_timer.wait_time = spawn_interval
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
-	spawn_timer.start()
+	DayAndNightCycleManager.TimeTick.connect(_on_time_tick)
+
+	if not is_restaurant_closed():
+		spawn_timer.start()
+
+func _on_time_tick(day: int, hour: int, minute: int) -> void:
+	if hour == 8 and minute == 0:
+		print("☀️ Resto ouvert ! Timer relancé.")
+		spawn_timer.start()
+
+func is_restaurant_closed() -> bool:
+	var time = DayAndNightCycleManager.Time
+	var total_minutes = int(time / (TAU / (24 * 60))) # hardcode
+	var hour = (total_minutes % 1440) / 60
+	return hour >= 22 or hour < 8
+
 
 func _on_spawn_timer_timeout():
 	if current_count >= spawn_limit:
 		spawn_timer.stop()
 		return
 	
+	if is_restaurant_closed():
+		print("⛔ Fermé, pas de spawn.")
+		spawn_timer.stop()
+		return
+
 	spawn_customer_random()
 	current_count += 1
 

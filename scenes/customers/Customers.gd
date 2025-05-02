@@ -30,12 +30,17 @@ func init_customer(item: Item, quantity: int)-> void:
 	
 	
 func _ready():
+	add_to_group("customer")
 	sprite.play(skin_name)
 	interactable.interact = _on_interact
 	interactable.is_interactable = true
 	interactable.interact_name  = interact_name
 	
+func force_leave():
+	print("🏃‍♂️ Je me casse, c’est fermé !")
+	queue_free()  
 
+	
 func show_order_ui()-> void:
 	item_img.texture = request_item.sprite	
 	label.text = str(request_quantity)
