@@ -40,6 +40,7 @@ size = Vector2(590, 67.5)
 [node name="Oven" type="StaticBody2D"]
 position = Vector2(7, -202)
 script = ExtResource("1_pgb8s")
+max_pizzas_on_counter = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(353, 457)

@@ -44,12 +44,12 @@ func spawn_pizza_crue():
 	get_tree().current_scene.call_deferred("add_child", pizza_instance)
 
 	# ✅ Forcer la détection après un léger délai
-	await get_tree().create_timer(0.05).timeout  # attendre un mini instant que la scène s’instancie
+	await get_tree().create_timer(0.05).timeout
 
-	if detection_zone.overlaps_area(pizza_instance):
+	if is_instance_valid(pizza_instance) and detection_zone.overlaps_area(pizza_instance):
 		_on_pizza_detected(pizza_instance)
 	else:
-		print("⚠️ Pizza non détectée malgré l'apparition")
+		print("⚠️ Pizza non détectée ou déjà libérée")
 
 # --- Appelé toutes les X secondes ---
 func spawn_timer():
@@ -84,6 +84,14 @@ func _on_interact():
 	state = FourState.EN_CUISSON
 
 	var pizza = pizzas_crues[0]
+	var cook_time = 1.5  # valeur par défaut
+
+	# Vérifie que la propriété existe directement (pas besoin de has_variable)
+	if "item_data" in pizza and pizza.item_data:
+		cook_time = pizza.item_data.cook_time
+		print("⏲️ Temps de cuisson :", cook_time)
+	else:
+		print("⚠️ Pas de donnée item_data trouvée")
 	if is_instance_valid(pizza):
 		pizza.queue_free()
 	pizzas_crues.erase(pizza)
@@ -91,7 +99,7 @@ func _on_interact():
 	sprite_2d.play("cook")
 	print("🔥 Cuisson de la pizza...")
 
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(10.0).timeout
 
 	sprite_2d.stop()
 	print("✅ Pizza cuite prête")
@@ -136,3 +144,10 @@ func check_if_ready_after_space():
 	print("📣 Un four a été notifié d’une place libre !")
 	# ✅ Plus de cuisson automatique ici
 	# Le joueur devra réappuyer pour cuire
+func launch_cooking():
+	if is_busy:
+		print("⏳ Le four est occupé.")
+		return
+	
+	print("👨‍🍳 Le cuisinier lance la cuisson automatiquement.")
+	_on_interact()  # simule une interaction

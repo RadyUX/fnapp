@@ -78,7 +78,8 @@ modulate = Color(1, 0, 1, 1)
 navigation_polygon = SubResource("NavigationPolygon_61y4y")
 
 [node name="Cooker" parent="Cooker" instance=ExtResource("9_8iurx")]
-position = Vector2(656, 872)
+position = Vector2(590, 893)
+WorkStations = Array[NodePath]([NodePath("../../Oven")])
 
 [node name="SpawnZone" parent="." instance=ExtResource("8_d4a0i")]
 position = Vector2(-902, 878)
