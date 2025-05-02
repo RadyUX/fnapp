@@ -32,6 +32,7 @@ theme = SubResource("Theme_uvvv5")
 script = ExtResource("2_kp344")
 
 [node name="DayPanel" type="PanelContainer" parent="."]
+layout_mode = 0
 offset_left = -11.0
 offset_right = 165.0
 offset_bottom = 101.0
@@ -47,6 +48,7 @@ label_settings = SubResource("LabelSettings_0wqhh")
 horizontal_alignment = 1
 
 [node name="TimePanel" type="PanelContainer" parent="."]
+layout_mode = 0
 offset_left = -11.0
 offset_top = 110.0
 offset_right = 165.0

@@ -25,7 +25,7 @@ public partial class StateMachine : Node
 		currentState.Disconnect("RequestStateChange", new Callable(this, nameof(OnStateRequested)));
 	}
 
-	currentState = GetNode<Node>(stateName); // Ex: "Walk" ou "Idle"
+	currentState = GetNode<Node>(stateName); 
 
 	if (currentState.HasSignal("RequestStateChange"))
 		currentState.Connect("RequestStateChange", new Callable(this, nameof(OnStateRequested)));
