@@ -9,7 +9,7 @@ public partial class DayAndNightCycleManager : Node
 	public readonly float GAME_MINUTE_DURATION;
 
 	// ⚙️ Paramètres de jeu
-	public float GameSpeed = 5.0f;
+	public float GameSpeed = 115.0f;
 
 	// 🕒 Données initiales
 	public int InitialDay = 1;
@@ -86,12 +86,25 @@ public void setInitialTime()
 		CurrentDay = day;
 		EmitSignal(nameof(TimeTickDay), day);
 	}
-
 	if (hour == 22 && minute == 0)
+	{
+		GD.Print("🌙 Il est 22h — on ferme !");
+
+		var panel = GetTree().CurrentScene.FindChild("EndOfDayPanel", true, false);
+
+if (panel == null)
 {
-	GD.Print("🌙 Il est 22h — on ferme !");
-	EmitSignal(nameof(ClosingTime));
+	GD.PrintErr("❌ EndOfDayPanel introuvable !");
 }
+else
+{
+	GD.Print("✅ EndOfDayPanel trouvé !");
+	panel.Call("show_summary");
+}
+
+
+		EmitSignal(nameof(ClosingTime));
+	}
 if (hour == 8 && minute == 0)
 {
 	GD.Print("☀️ Il est 8h du mat !");

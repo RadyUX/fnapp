@@ -18,6 +18,10 @@ public partial class GameStats : Node
 	[Export] public int MoneyLoss = 0;             // 💸 Dépenses (réparations, taxes, achats...)
 	[Export] public int PopularityLoss = 0;        // 🔻 Perte de réputation (drames...)
 
+	// 🔻 Total des malus (argent + réputation)
+	public int Malus => MoneyLoss + PopularityLoss;
+
+
 	public override void _Ready()
 	{
 		Instance = this;
@@ -99,6 +103,16 @@ public partial class GameStats : Node
 		UpdateProfit();
 	}
 
+	public void ApplyMurderPenalty()
+{
+	int loss = 100_000;
+	PopularityLoss += loss;
+
+	GD.Print("🩸 Meurtre détecté ! Popularité -100 000");
+	UpdatePopularity();
+}
+
+
 	// === Compatibilité GDScript ===
 	public int popularity => Popularity;
 	public int money => Money;
@@ -111,5 +125,6 @@ public partial class GameStats : Node
 	public void add_entertainment(int value) => AddEntertainment(value);
 	public void apply_tax() => ApplyTax();
 	public void reset_day_stats() => ResetDayStats();
+	
 
 }

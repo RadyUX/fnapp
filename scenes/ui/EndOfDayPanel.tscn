@@ -1,0 +1,103 @@
+[gd_scene load_steps=9 format=3 uid="uid://dpei5fw8l5m6a"]
+
+[ext_resource type="Script" uid="uid://dch0rrvu3glog" path="res://scenes/ui/endof_day_panel.gd" id="1_6f65o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u1t0h"]
+bg_color = Color(0.054902, 0.0666667, 0.160784, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_m3iha"]
+font_size = 30
+font_color = Color(0.973143, 0.558016, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4dmbu"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_it7og"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_b5w0j"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_r8l7v"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_frt5u"]
+font_size = 30
+
+[node name="EndOfDayPanel" type="CanvasLayer"]
+script = ExtResource("1_6f65o")
+
+[node name="Panel" type="Panel" parent="."]
+layout_direction = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -292.0
+offset_right = 350.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u1t0h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -334.0
+offset_top = 16.0
+offset_right = 337.0
+offset_bottom = 410.0
+grow_horizontal = 2
+
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "END OF THE DAY"
+label_settings = SubResource("LabelSettings_m3iha")
+
+[node name="PopularityLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "QQQQ"
+label_settings = SubResource("LabelSettings_4dmbu")
+
+[node name="IncomeLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "QQQQQQ"
+label_settings = SubResource("LabelSettings_it7og")
+
+[node name="TaxesLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "QQQQQ"
+label_settings = SubResource("LabelSettings_b5w0j")
+
+[node name="MalusLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "QQQQ"
+label_settings = SubResource("LabelSettings_r8l7v")
+
+[node name="NetLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "QQQQ"
+label_settings = SubResource("LabelSettings_frt5u")
+
+[node name="CloseButton" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_left = 218.0
+offset_top = 303.0
+offset_right = 498.0
+offset_bottom = 403.0
+text = "OK"
