@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bnpokhgwn0njq"]
+[gd_scene load_steps=19 format=4 uid="uid://bnpokhgwn0njq"]
 
 [ext_resource type="Script" uid="uid://s808k7lnid1f" path="res://scenes/restaurant/restaurant.gd" id="1_iicbp"]
 [ext_resource type="PackedScene" uid="uid://1ns87l4tsgcy" path="res://scenes/DayAndNightCycleComponent.tscn" id="2_6whu3"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://brqhm2vsgvgyu" path="res://scenes/ui/InventoryUI.tscn" id="9_55vef"]
 [ext_resource type="PackedScene" uid="uid://yo7pkkfsipu2" path="res://scenes/ui/GameStatUi.tscn" id="10_2tehs"]
 [ext_resource type="PackedScene" uid="uid://beaxjeds6qynl" path="res://scenes/ui/DayAndNightPanel.tscn" id="11_6a52p"]
+[ext_resource type="PackedScene" uid="uid://gxj4th4wwtk3" path="res://scenes/ui/shopPanelUi.tscn" id="14_61y4y"]
 
 [sub_resource type="Gradient" id="Gradient_6whu3"]
 offsets = PackedFloat32Array(0.0178571, 0.125, 0.208333, 0.285714, 1)
@@ -99,3 +100,12 @@ offset_left = 977.0
 offset_top = 370.0
 offset_right = 977.0
 offset_bottom = 370.0
+
+[node name="OpenShop" type="Button" parent="."]
+offset_left = 532.0
+offset_top = 504.0
+offset_right = 621.0
+offset_bottom = 535.0
+text = "open shop"
+
+[node name="ShopPanelUi" parent="." instance=ExtResource("14_61y4y")]

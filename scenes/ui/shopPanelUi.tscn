@@ -1,0 +1,286 @@
+[gd_scene load_steps=7 format=3 uid="uid://gxj4th4wwtk3"]
+
+[ext_resource type="Texture2D" uid="uid://ctisc7otu2yd2" path="res://assets/cuisinier_1.png" id="1_j47x4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jypm1"]
+bg_color = Color(0.054902, 0.0666667, 0.160784, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.513726, 0.403922, 0.780392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1esr"]
+bg_color = Color(0.513726, 0.403922, 0.780392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dx5bk"]
+font_size = 37
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxtrj"]
+bg_color = Color(0.858824, 0.227451, 0.227451, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_to112"]
+
+[node name="ShopPanelUi" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 272.0
+offset_top = -10.0
+offset_right = 272.0
+offset_bottom = 342.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jypm1")
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+tab_alignment = 1
+current_tab = 0
+
+[node name="Employees" type="Control" parent="Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/Employees"]
+custom_minimum_size = Vector2(850, 850)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -425.0
+offset_top = -850.0
+offset_right = 425.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="NewCooker" type="Panel" parent="Panel/TabContainer/Employees/VBoxContainer"]
+custom_minimum_size = Vector2(450, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1esr")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 53.0
+offset_top = -45.0
+offset_right = 98.0
+offset_bottom = 40.0
+grow_vertical = 2
+texture = ExtResource("1_j47x4")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Description Label" type="Label" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -25.5
+offset_right = 171.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hire 	A New Cooker  +1"
+label_settings = SubResource("LabelSettings_dx5bk")
+
+[node name="newCooker1" type="Button" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker"]
+custom_minimum_size = Vector2(169, 90)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -45.0
+offset_right = -28.0
+offset_bottom = 46.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxtrj")
+text = "1000"
+icon = SubResource("ViewportTexture_to112")
+
+[node name="NewCooker2" type="Panel" parent="Panel/TabContainer/Employees/VBoxContainer"]
+custom_minimum_size = Vector2(450, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1esr")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker2"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 53.0
+offset_top = -45.0
+offset_right = 98.0
+offset_bottom = 40.0
+grow_vertical = 2
+texture = ExtResource("1_j47x4")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Description Label" type="Label" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -25.5
+offset_right = 171.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hire 	A New Cooker  +1"
+label_settings = SubResource("LabelSettings_dx5bk")
+
+[node name="newCooker1" type="Button" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker2"]
+custom_minimum_size = Vector2(169, 90)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -45.0
+offset_right = -28.0
+offset_bottom = 46.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxtrj")
+text = "1000"
+icon = SubResource("ViewportTexture_to112")
+
+[node name="NewCooker3" type="Panel" parent="Panel/TabContainer/Employees/VBoxContainer"]
+custom_minimum_size = Vector2(450, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1esr")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker3"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 53.0
+offset_top = -45.0
+offset_right = 98.0
+offset_bottom = 40.0
+grow_vertical = 2
+texture = ExtResource("1_j47x4")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Description Label" type="Label" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -25.5
+offset_right = 171.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hire 	A New Cooker  +1"
+label_settings = SubResource("LabelSettings_dx5bk")
+
+[node name="newCooker1" type="Button" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker3"]
+custom_minimum_size = Vector2(169, 90)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -45.0
+offset_right = -28.0
+offset_bottom = 46.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxtrj")
+text = "1000"
+icon = SubResource("ViewportTexture_to112")
+
+[node name="NewCooker4" type="Panel" parent="Panel/TabContainer/Employees/VBoxContainer"]
+custom_minimum_size = Vector2(450, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1esr")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker4"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 53.0
+offset_top = -45.0
+offset_right = 98.0
+offset_bottom = 40.0
+grow_vertical = 2
+texture = ExtResource("1_j47x4")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Description Label" type="Label" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -25.5
+offset_right = 171.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hire 	A New Cooker  +1"
+label_settings = SubResource("LabelSettings_dx5bk")
+
+[node name="newCooker1" type="Button" parent="Panel/TabContainer/Employees/VBoxContainer/NewCooker4"]
+custom_minimum_size = Vector2(169, 90)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -45.0
+offset_right = -28.0
+offset_bottom = 46.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxtrj")
+text = "1000"
+icon = SubResource("ViewportTexture_to112")
+
+[node name="Animatronics" type="Control" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1

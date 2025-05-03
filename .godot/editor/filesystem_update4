@@ -23,3 +23,5 @@ res://scenes/interactables/oven.tscn
 res://data/PizzaCuite.tres
 res://scenes/interactables/pizzacru.gd
 res://scenes/interactables/pizzacru.tscn
+res://scenes/restaurant/restaurant.gd
+res://scenes/ui/shopPanelUi.tscn
