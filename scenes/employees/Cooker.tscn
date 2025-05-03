@@ -27,7 +27,6 @@ collision_layer = 2
 collision_mask = 2
 platform_wall_layers = 3
 script = ExtResource("1_rqa0d")
-WorkStations = Array[NodePath]([NodePath("")])
 Character = NodePath(".")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -42,4 +41,3 @@ position = Vector2(15, -28)
 shape = SubResource("CapsuleShape2D_1bc14")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true

@@ -1,14 +1,14 @@
+Node2D
+CanvasLayer
 Button
 Label
 TextureRect
 Panel
 VBoxContainer
 Control
-CanvasLayer
 TextEdit
 TabContainer
 TabBar
 Node
-Node2D
 NavigationRegion2D
 NavigationAgent2D

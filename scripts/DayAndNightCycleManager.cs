@@ -92,6 +92,12 @@ public void setInitialTime()
 	GD.Print("🌙 Il est 22h — on ferme !");
 	EmitSignal(nameof(ClosingTime));
 }
+if (hour == 8 && minute == 0)
+{
+	GD.Print("☀️ Il est 8h du mat !");
+	var manager = GetNodeOrNull("/root/EmployeeManager"); // ou ton singleton réel
+	manager?.Call("SpawnCooker");
+}
 
 }
 }

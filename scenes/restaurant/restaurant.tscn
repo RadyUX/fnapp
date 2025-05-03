@@ -79,7 +79,7 @@ modulate = Color(1, 0, 1, 1)
 navigation_polygon = SubResource("NavigationPolygon_61y4y")
 
 [node name="Cooker" parent="Cooker" instance=ExtResource("9_8iurx")]
-position = Vector2(590, 893)
+position = Vector2(646, 873)
 WorkStations = Array[NodePath]([NodePath("../../Oven")])
 
 [node name="SpawnZone" parent="." instance=ExtResource("8_d4a0i")]
@@ -101,11 +101,13 @@ offset_top = 370.0
 offset_right = 977.0
 offset_bottom = 370.0
 
-[node name="OpenShop" type="Button" parent="."]
-offset_left = 532.0
-offset_top = 504.0
-offset_right = 621.0
-offset_bottom = 535.0
-text = "open shop"
-
 [node name="ShopPanelUi" parent="." instance=ExtResource("14_61y4y")]
+
+[node name="Buttons" type="CanvasLayer" parent="."]
+
+[node name="OpenShop" type="Button" parent="Buttons"]
+offset_left = 56.0
+offset_top = 525.0
+offset_right = 231.0
+offset_bottom = 632.0
+text = "open shop"

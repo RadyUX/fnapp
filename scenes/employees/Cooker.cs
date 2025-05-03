@@ -15,11 +15,15 @@ public partial class Cooker : CharacterBody2D
 	private float speed = 80f;
 	private List<Node2D> stationInstances = new();
 
-	
+
 	public override void _Ready()
 	{
+
+		
 		GD.Print("🧠 _Ready() appelé.");
-	
+		Velocity = Vector2.Zero;
+_navAgent?.SetVelocity(Vector2.Zero);
+		
 	GD.Print("👨‍🍳 Cooker prêt !");
 	
 	var cycle = GetNode<DayAndNightCycleManager>("/root/DayAndNightCycleManager");
@@ -27,6 +31,7 @@ public partial class Cooker : CharacterBody2D
 	{
 		cycle.ClosingTime += OnClosingTime; // ✅ ici c’est valide
 		GD.Print("✅ Connecté au signal de fermeture !");
+	
 	}
 	else
 	{
@@ -34,7 +39,17 @@ public partial class Cooker : CharacterBody2D
 	}
 
 		_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		_navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+		_navAgent = GetNodeOrNull<NavigationAgent2D>("NavigationAgent2D");
+		if (_navAgent != null)
+		{
+			GD.Print("✅ NavigationAgent2D trouvé !");
+			_navAgent.NavigationFinished += OnNavigationFinished;
+		}
+		else
+		{
+			GD.PrintErr("❌ NavigationAgent2D introuvable !");
+		}
+
 
 		if (_animatedSprite != null)
 		{
@@ -46,15 +61,7 @@ public partial class Cooker : CharacterBody2D
 			GD.PrintErr("❌ AnimatedSprite2D introuvable !");
 		}
 
-		if (_navAgent != null)
-		{
-			GD.Print("✅ NavigationAgent2D trouvé !");
-			_navAgent.NavigationFinished += OnNavigationFinished;
-		}
-		else
-		{
-			GD.PrintErr("❌ NavigationAgent2D introuvable !");
-		}
+		
 
 		foreach (var path in WorkStations)
 		{
@@ -70,26 +77,61 @@ public partial class Cooker : CharacterBody2D
 				GD.PrintErr($"❌ Station introuvable : {path}");
 			}
 		}
-
-		StartCookingCycle();
+StartCookingCycle();
+		
 	}
 
-	private void StartCookingCycle()
+	public void SetStations(List<Node2D> stations)
+{
+	if (stations == null || stations.Count == 0)
 	{
-		GD.Print("🚶‍♂️ StartCookingCycle()");
-
-		if (stationInstances.Count == 0)
-		{
-			GD.PrintErr("❌ Pas de stations à visiter.");
-			return;
-		}
-
-		var target = stationInstances[currentStationIndex].GlobalPosition;
-		GD.Print($"🎯 Déplacement vers la station #{currentStationIndex} à {target}");
-		_navAgent.TargetPosition = target;
-
-		currentStationIndex = (currentStationIndex + 1) % stationInstances.Count;
+		GD.PrintErr("❌ Liste des stations vide ou null !");
+		return;
 	}
+
+	stationInstances = stations;
+
+	foreach (var station in stationInstances)
+	{
+		if (station == null)
+		{
+			GD.PrintErr("❌ Une station reçue est NULL !");
+		}
+		else
+		{
+			GD.Print($"✅ Station assignée : {station.Name} à {station.GlobalPosition}");
+		}
+	}
+
+	// Réinitialise position et vitesse pour éviter un bug
+	Velocity = Vector2.Zero;
+	_navAgent?.SetVelocity(Vector2.Zero);
+
+	// Lance le cycle après s'être assuré que tout est prêt
+	CallDeferred(nameof(StartCookingCycle));
+}
+
+	private async void StartCookingCycle()
+{
+	GD.Print("🚶‍♂️ StartCookingCycle()");
+
+	if (stationInstances.Count == 0)
+	{
+		GD.PrintErr("❌ Pas de stations à visiter.");
+		return;
+	}
+
+	var target = stationInstances[currentStationIndex].GlobalPosition;
+	GD.Print($"🎯 Déplacement vers la station #{currentStationIndex} à {target}");
+
+	_navAgent.TargetPosition = target;
+
+	// 🔒 ATTEND que le path soit prêt
+	await ToSignal(_navAgent, "path_changed");
+
+	currentStationIndex = (currentStationIndex + 1) % stationInstances.Count;
+}
+
 
 	private void OnNavigationFinished()
 	{
@@ -151,6 +193,23 @@ GD.Print($"📍 Position actuelle : {GlobalPosition}");
 public void OnClosingTime()
 {
 	GD.Print("👨‍🍳 Il est 22h, je rentre !");
-	QueueFree(); // ou une animation de départ si tu préfères
+
+	var cycle = GetNodeOrNull<DayAndNightCycleManager>("/root/DayAndNightCycleManager");
+	if (cycle != null)
+	{
+		cycle.ClosingTime -= OnClosingTime;
+		cycle.TimeTick -= OnTimeTick;
+	}
+
+	QueueFree();
 }
+
+public void OnTimeTick(int day, int hour, int minute)
+{
+	// Tu peux ajouter du code ici si tu veux que le cuisinier revive à 8h
+	GD.Print($"🕗 Tick reçu : {hour}h{minute} — (Cooker déjà mort)");
+}
+
+
+
 }
