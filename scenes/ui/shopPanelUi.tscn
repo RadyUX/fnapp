@@ -1,7 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://gxj4th4wwtk3"]
+[gd_scene load_steps=12 format=3 uid="uid://gxj4th4wwtk3"]
 
+[ext_resource type="Script" uid="uid://dti3ag0dxye3p" path="res://scenes/ui/shop_panel_ui.gd" id="1_c283v"]
 [ext_resource type="Texture2D" uid="uid://ctisc7otu2yd2" path="res://assets/cuisinier_1.png" id="1_j47x4"]
 [ext_resource type="Texture2D" uid="uid://drax2rwhyg3jr" path="res://assets/Untitled - 3.png" id="2_jypm1"]
+[ext_resource type="Texture2D" uid="uid://tgeqviy2fgia" path="res://assets/mascot_1.png" id="3_yxtrj"]
+[ext_resource type="Texture2D" uid="uid://5d6i0gjeygeq" path="res://assets/janitor_1.png" id="4_to112"]
+[ext_resource type="Texture2D" uid="uid://dpgm1ebtq5wt6" path="res://assets/waiter_1.png" id="5_iunpw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jypm1"]
 bg_color = Color(0.054902, 0.0666667, 0.160784, 1)
@@ -24,6 +28,7 @@ bg_color = Color(0.858824, 0.227451, 0.227451, 1)
 
 [node name="ShopPanelUi" type="CanvasLayer"]
 visible = false
+script = ExtResource("1_c283v")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
@@ -48,13 +53,84 @@ offset_right = -13.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 20
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
+
+[node name="Furnitures" type="Control" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/Furnitures"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewCooker" type="Panel" parent="Panel/TabContainer/Furnitures/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1esr")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Furnitures/VBoxContainer/NewCooker"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -44.0
+offset_right = 85.0
+offset_bottom = 41.0
+grow_vertical = 2
+texture = ExtResource("1_j47x4")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Description Label" type="Label" parent="Panel/TabContainer/Furnitures/VBoxContainer/NewCooker"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.5
+offset_top = -24.0
+offset_right = 229.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "New Cooker  +1"
+label_settings = SubResource("LabelSettings_dx5bk")
+
+[node name="newCooker1" type="Button" parent="Panel/TabContainer/Furnitures/VBoxContainer/NewCooker"]
+custom_minimum_size = Vector2(169, 90)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -45.0
+offset_right = -6.0
+offset_bottom = 45.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxtrj")
+text = "1000 $
+"
+icon = SubResource("ViewportTexture_to112")
 
 [node name="Employees" type="Control" parent="Panel/TabContainer"]
 layout_mode = 2
-metadata/_tab_index = 0
+metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/Employees"]
 custom_minimum_size = Vector2(100, 100)
@@ -66,6 +142,168 @@ offset_left = -4.0
 offset_right = 5.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="NewMascot" type="Panel" parent="Panel/TabContainer/Employees/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1esr")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Employees/VBoxContainer/NewMascot"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 30.0
+offset_top = -43.0
+offset_right = 92.0
+offset_bottom = 42.0
+grow_vertical = 2
+texture = ExtResource("3_yxtrj")
+expand_mode = 1
+
+[node name="Description Label" type="Label" parent="Panel/TabContainer/Employees/VBoxContainer/NewMascot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.5
+offset_top = -24.0
+offset_right = 229.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "New Mascot  +1"
+label_settings = SubResource("LabelSettings_dx5bk")
+
+[node name="newMascot" type="Button" parent="Panel/TabContainer/Employees/VBoxContainer/NewMascot"]
+custom_minimum_size = Vector2(169, 90)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -45.0
+offset_right = -6.0
+offset_bottom = 45.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxtrj")
+text = "10 $
+"
+icon = SubResource("ViewportTexture_to112")
+
+[node name="NewJanitor" type="Panel" parent="Panel/TabContainer/Employees/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1esr")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Employees/VBoxContainer/NewJanitor"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -44.0
+offset_right = 90.0
+offset_bottom = 41.0
+grow_vertical = 2
+texture = ExtResource("4_to112")
+expand_mode = 1
+
+[node name="Description Label" type="Label" parent="Panel/TabContainer/Employees/VBoxContainer/NewJanitor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.5
+offset_top = -24.0
+offset_right = 229.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "New Janitor  +1"
+label_settings = SubResource("LabelSettings_dx5bk")
+
+[node name="newJanitor1" type="Button" parent="Panel/TabContainer/Employees/VBoxContainer/NewJanitor"]
+custom_minimum_size = Vector2(169, 90)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -45.0
+offset_right = -6.0
+offset_bottom = 45.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxtrj")
+text = "100 $
+"
+icon = SubResource("ViewportTexture_to112")
+
+[node name="NewWaiter" type="Panel" parent="Panel/TabContainer/Employees/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1esr")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Employees/VBoxContainer/NewWaiter"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 43.0
+offset_top = -42.0
+offset_right = 88.0
+offset_bottom = 43.0
+grow_vertical = 2
+texture = ExtResource("5_iunpw")
+expand_mode = 1
+
+[node name="Description Label" type="Label" parent="Panel/TabContainer/Employees/VBoxContainer/NewWaiter"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.5
+offset_top = -24.0
+offset_right = 229.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "New Waiter  +1"
+label_settings = SubResource("LabelSettings_dx5bk")
+
+[node name="newWaiter1" type="Button" parent="Panel/TabContainer/Employees/VBoxContainer/NewWaiter"]
+custom_minimum_size = Vector2(169, 90)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -45.0
+offset_right = -6.0
+offset_bottom = 45.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxtrj")
+text = "500 $
+"
+icon = SubResource("ViewportTexture_to112")
 
 [node name="NewCooker" type="Panel" parent="Panel/TabContainer/Employees/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -125,7 +363,7 @@ icon = SubResource("ViewportTexture_to112")
 [node name="Animatronics" type="Control" parent="Panel/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/TabContainer/Animatronics"]
 custom_minimum_size = Vector2(100, 100)

@@ -30,9 +30,9 @@ font_size = 30
 script = ExtResource("1_en5h1")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 832.0
+offset_left = 707.0
 offset_top = -3.0
-offset_right = 1159.0
+offset_right = 1152.0
 offset_bottom = 193.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_en5h1")
 

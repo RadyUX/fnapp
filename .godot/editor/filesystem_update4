@@ -20,3 +20,7 @@ res://scenes/customers/Walk.cs
 res://scripts/EmployeeManager.cs
 res://scenes/customers/Idle.cs
 res://scripts/core/GameManager.cs
+res://scenes/ui/shop_panel_ui.gd
+res://scenes/employees/Mascot.cs
+res://scenes/employees/Mascot.tscn
+res://default_bus_layout.tres

@@ -63,7 +63,7 @@ _navAgent?.SetVelocity(Vector2.Zero);
 
 		
 
-		foreach (var path in WorkStations)
+		foreach (var path in WorkStations?? Array.Empty<NodePath>())
 		{
 			GD.Print($"🔍 Tentative de chargement station : {path}");
 			var station = GetNodeOrNull<Node2D>(path);
@@ -77,7 +77,7 @@ _navAgent?.SetVelocity(Vector2.Zero);
 				GD.PrintErr($"❌ Station introuvable : {path}");
 			}
 		}
-StartCookingCycle();
+
 		
 	}
 
