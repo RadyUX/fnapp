@@ -13,9 +13,15 @@ public partial class Waiter : CharacterBody2D
 	public Inventory inventory;
 	private AudioStreamPlayer2D cashSound;
 
+	
+
 
 	private bool hasPizza = false;
 	private int pizzasToCollect = 0;
+
+	private bool isLooping = false;
+
+
 
 	public override void _Ready()
 	{
@@ -29,6 +35,12 @@ public partial class Waiter : CharacterBody2D
 		NavAgent.NavigationFinished += OnNavigationFinished;
 cashSound = GetNode<AudioStreamPlayer2D>("CashSound");
 		StartPizzaLoop();
+
+			var cycle = GetNodeOrNull<DayAndNightCycleManager>("/root/DayAndNightCycleManager");
+	if (cycle != null)
+	{
+		cycle.ClosingTime += OnClosingTime;
+	}
 	}
 
 	private void OnNavigationFinished()
@@ -49,16 +61,19 @@ cashSound = GetNode<AudioStreamPlayer2D>("CashSound");
 
 	public async void StartPizzaLoop()
 	{
-		while (true)
-		{
-			await ToSignal(GetTree().CreateTimer(1.0), "timeout");
+		if (isLooping)
+			return;
 
-			if (!hasPizza && currentTarget == null)
-			{
-				GD.Print("🔁 Boucle ➤ relance FindPizza()");
-				FindPizza();
-			}
+		isLooping = true;
+
+		while (!hasPizza && currentTarget == null)
+		{
+			GD.Print("🔁 Boucle ➤ relance FindPizza()");
+			FindPizza();
+			await ToSignal(GetTree().CreateTimer(1.0), "timeout");
 		}
+
+		isLooping = false;
 	}
 
 	public void FindPizza()
@@ -114,7 +129,7 @@ catch (Exception e)
 	{
 		if (node is Area2D pizza && pizza.HasMeta("taken") == false)
 		{
-			GD.Print("✅ Pizza trouvée : " + pizza.Name);
+			
 			pizza.SetMeta("taken", true);
 			currentTarget = pizza;
 			NavAgent.TargetPosition = pizza.GlobalPosition;
@@ -123,6 +138,14 @@ catch (Exception e)
 	}
 
 	GD.Print("❌ Aucune pizza trouvée pour commencer la commande.");
+
+	deliveryTarget = null;
+	pizzasToCollect = 0;
+	currentTarget = null;
+
+	// Redémarre la boucle pour réessayer plus tard
+	StartPizzaLoop();
+
 }
 
 	public override void _PhysicsProcess(double delta)
@@ -180,7 +203,7 @@ catch (Exception e)
 	{
 		GD.Print($"🍕 Il manque encore {pizzasToCollect - count} pizza(s) à ramasser.");
 		currentTarget = null;
-		FindPizza();
+		StartPizzaLoop();
 	}
 	else
 	{
@@ -237,8 +260,34 @@ npc.Call("receive_item", requestedItem, playerInventory);
 	if (cashSound != null)
 		cashSound.Play();
 
-	StartPizzaLoop(); // Repart chercher d'autres 
+	StartPizzaLoop(); 
+	FindPizza();
 }
+public void OnClosingTime()
+{
+	GD.Print("🌙 Fermeture : le serveur rentre chez lui.");
+
+	// Stop toute logique en cours
+	currentTarget = null;
+	deliveryTarget = null;
+	hasPizza = false;
+	pizzasToCollect = 0;
+	isLooping = false;
+
+	// Se désabonne proprement
+	var cycle = GetNodeOrNull<DayAndNightCycleManager>("/root/DayAndNightCycleManager");
+	if (cycle != null)
+	{
+		cycle.ClosingTime -= OnClosingTime;
+	}
+
+	// Optionnel : informer le manager
+	var manager = GetTree().CurrentScene.FindChild("EmployeeManager", true, false) as EmployeeManager;
+
+	QueueFree(); // le serveur disparaît
+}
+
+
 
 
 

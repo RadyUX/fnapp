@@ -7,6 +7,10 @@ public partial class EmployeeManager : Node
 	private Cooker currentCooker;
 	private Mascot currentMascot;
 
+	private Waiter currentWaiter;
+	private int maxWaiters = 3;
+	private List<Waiter> activeWaiters = new List<Waiter>();
+
 	private int employeeCount = 0;
 
 	public void RegisterEmployee()
@@ -89,4 +93,45 @@ var mascotScene = GD.Load<PackedScene>("res://scenes/employees/Mascot.tscn");
 		GD.Print("🤡 Mascot spawné !");
 		RegisterEmployee(); 
 	}
+
+	
+
+public void SpawnWaiter()
+{
+	if (activeWaiters.Count >= maxWaiters)
+	{
+		GD.PrintErr("🚫 Limite de serveurs atteinte (" + maxWaiters + ")");
+		return;
+	}
+
+	var WaiterScene = GD.Load<PackedScene>("res://scenes/employees/Waiter.tscn");
+	if (WaiterScene == null)
+	{
+		GD.PrintErr("🚨 WaiterScene n’est pas assigné !");
+		return;
+	}
+
+	var waiterInstance = WaiterScene.Instantiate() as Waiter;
+	if (waiterInstance == null)
+	{
+		GD.PrintErr("❌ Échec de l’instanciation du serveur.");
+		return;
+	}
+
+	waiterInstance.GlobalPosition = new Vector2(630.0f, 865.875f); 
+	GetTree().CurrentScene.AddChild(waiterInstance);
+
+	activeWaiters.Add(waiterInstance);
+
+	// Callback pour suppression automatique s’il part
+	waiterInstance.TreeExited += () =>
+	{
+		activeWaiters.Remove(waiterInstance);
+		GD.Print("👋 Serveur supprimé. Actifs : " + activeWaiters.Count);
+	};
+
+	GD.Print("🧍‍♂️ Serveur spawné ! (" + activeWaiters.Count + "/" + maxWaiters + ")");
+	RegisterEmployee(); // optionnel si tu veux une autre logique
+}
+
  }
