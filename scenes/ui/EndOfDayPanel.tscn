@@ -29,6 +29,7 @@ font_size = 30
 font_size = 30
 
 [node name="EndOfDayPanel" type="CanvasLayer"]
+visible = false
 script = ExtResource("1_6f65o")
 
 [node name="Panel" type="Panel" parent="."]

@@ -64,7 +64,8 @@ func receive_item(item_name: String, inventory: Inventory):
 	for i in range(request_quantity):
 		inventory.RemoveItem(item_name)
 
-	print("🧺 Pizza donnée.")
+	GameStats.add_profit(request_quantity * 3)
+	print("🍕 Commande livrée par un serveur !")
 
 
 	$cash_sound.play()
@@ -74,3 +75,9 @@ func receive_item(item_name: String, inventory: Inventory):
 
 func _on_interact():
 	receive_item("pizza_cuite", inventory)
+	
+func get_request_item_name() -> String:
+	return request_item.name
+
+func get_request_quantity() -> int:
+	return request_quantity

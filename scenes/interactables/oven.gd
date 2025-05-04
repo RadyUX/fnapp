@@ -62,7 +62,7 @@ func spawn_timer():
 func _on_pizza_detected(area):
 	if area.is_in_group("pizzacru") and area.is_ready_for_cuisson:
 		pizzas_crues.append(area)
-		print("🍕 Pizza détectée :", area.name)
+		
 
 
 # --- Quand une pizza quitte la zone ---

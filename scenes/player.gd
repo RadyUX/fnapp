@@ -19,7 +19,9 @@ var carried_item_name: String = ""
 
 
 	
-	
+func _ready():
+	name = "Player"
+
 func _process(delta):
 	
 	

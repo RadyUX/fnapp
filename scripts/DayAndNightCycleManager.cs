@@ -9,7 +9,7 @@ public partial class DayAndNightCycleManager : Node
 	public readonly float GAME_MINUTE_DURATION;
 
 	// ⚙️ Paramètres de jeu
-	public float GameSpeed = 115.0f;
+	public float GameSpeed = 5.0f;
 
 	// 🕒 Données initiales
 	public int InitialDay = 1;

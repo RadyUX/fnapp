@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7g0i2nqfvpuu"]
+
+[ext_resource type="Script" uid="uid://vsr7fle3kj8q" path="res://scenes/employees/Waiter.cs" id="1_0xxp6"]
+[ext_resource type="Texture2D" uid="uid://dpgm1ebtq5wt6" path="res://assets/waiter_1.png" id="1_osote"]
+[ext_resource type="Texture2D" uid="uid://b02u1g4pb86i2" path="res://assets/waiter_2.png" id="2_0xxp6"]
+[ext_resource type="AudioStream" uid="uid://htv5ychi48wk" path="res://assets/cash.mp3" id="4_efs07"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efs07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_osote")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0xxp6")
+}],
+"loop": true,
+"name": &"waiter_1",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m1nkb"]
+radius = 17.0
+height = 42.0
+
+[node name="Waiter" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_0xxp6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(7.5, -13.3333)
+scale = Vector2(1.27778, 1.27778)
+sprite_frames = SubResource("SpriteFrames_efs07")
+animation = &"waiter_1"
+frame_progress = 0.840443
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12, -14)
+shape = SubResource("CapsuleShape2D_m1nkb")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CashSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_efs07")
