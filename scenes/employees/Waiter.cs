@@ -5,7 +5,7 @@ public partial class Waiter : CharacterBody2D
 {
 	[Export] public float Speed = 80f;
 	[Export] public string name = "pepito";
-
+    [Export] public string SkinName = "waiter_1";
 	private NavigationAgent2D NavAgent;
 	private AnimatedSprite2D Sprite;
 	private Node2D currentTarget;
@@ -30,7 +30,7 @@ public partial class Waiter : CharacterBody2D
 		Sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		inventory = new Inventory();
 		AddChild(inventory);
-		Sprite.Play("waiter_1");
+		Sprite.Play(SkinName);
 
 		NavAgent.NavigationFinished += OnNavigationFinished;
 cashSound = GetNode<AudioStreamPlayer2D>("CashSound");
@@ -289,6 +289,20 @@ public void OnClosingTime()
 
 
 
+public void SetNameTag(string newName)
+{
+	name = newName;
+
+	var nameLabel = GetNodeOrNull<Label>("NameLabel");
+	if (nameLabel != null)
+	{
+		nameLabel.Text = name;
+	}
+	else
+	{
+		GD.PrintErr("⚠️ NameLabel non trouvé !");
+	}
+}
 
 
 }

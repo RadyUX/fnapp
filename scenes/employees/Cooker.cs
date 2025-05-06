@@ -14,7 +14,7 @@ public partial class Cooker : CharacterBody2D
 	private int currentStationIndex = 0;
 	private float speed = 80f;
 	private List<Node2D> stationInstances = new();
-
+	public string name = "???";
 
 	public override void _Ready()
 	{
@@ -210,6 +210,23 @@ public void OnTimeTick(int day, int hour, int minute)
 	GD.Print($"🕗 Tick reçu : {hour}h{minute} — (Cooker déjà mort)");
 }
 
+
+
+
+public void SetNameTag(string newName)
+{
+	name = newName;
+
+	var nameLabel = GetNodeOrNull<Label>("NameLabel");
+	if (nameLabel != null)
+	{
+		nameLabel.Text = name;
+	}
+	else
+	{
+		GD.PrintErr("⚠️ NameLabel non trouvé !");
+	}
+}
 
 
 }

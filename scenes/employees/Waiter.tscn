@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7g0i2nqfvpuu"]
+[gd_scene load_steps=8 format=3 uid="uid://b0kyifo6vpd3r"]
 
 [ext_resource type="Script" uid="uid://vsr7fle3kj8q" path="res://scenes/employees/Waiter.cs" id="1_0xxp6"]
 [ext_resource type="Texture2D" uid="uid://dpgm1ebtq5wt6" path="res://assets/waiter_1.png" id="1_osote"]
@@ -23,6 +23,10 @@ animations = [{
 radius = 17.0
 height = 42.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_efs07"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
 [node name="Waiter" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 0
@@ -43,3 +47,12 @@ shape = SubResource("CapsuleShape2D_m1nkb")
 
 [node name="CashSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_efs07")
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -15.0
+offset_top = -108.0
+offset_right = 25.0
+offset_bottom = -80.0
+text = "lol"
+label_settings = SubResource("LabelSettings_efs07")
+uppercase = true

@@ -12,30 +12,27 @@ func _ready():
 	close_button.pressed.connect(hide)
 	hide()
 
-
 func show_summary():
 	print("📊 show_summary appelé")
-	
-	
-	
+	GameStats.FinalizeDay()
+
 	var popularity = GameStats.Popularity
 	var income = GameStats.Profit
-	var tax_rate = popularity / 10
-	var taxes = int(income * tax_rate / 100.0)
-	var malus = GameStats.PopularityLoss 
-	var net = income - taxes - malus
-	net = max(net, 0)
+	var summary = GameStats.GetEndOfDaySummary()
+	var tax_rate = summary[0]
+	var taxes = summary[1]
+	var malus = summary[2]
+	var net = summary[3]
 
-	GameStats.Money -= taxes  
-	GameStats.Money += net    
+	# On applique les effets uniquement maintenant
+	GameStats.Money -= taxes
+	GameStats.Money += net
 
-	
-		
 	popularity_label.text = "Popularité : %d" % popularity
 	income_label.text = "Revenu brut : $%d" % income
 	taxes_label.text = "Taxes (%d%%) : -$%d" % [tax_rate, taxes]
 	malus_label.text = "Malus : -$%d" % malus
-	net_label.text = "Revenu net : $%d" % net
-	
+	net_label.text = "Revenu net : $%d" % net # pas GameStats.Money ici !
+
 
 	show()

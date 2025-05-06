@@ -1,4 +1,6 @@
+AudioStreamPlayer
 AudioStreamPlayer2D
+Label
 NavigationRegion2D
 Node2D
 NavigationAgent2D
@@ -6,10 +8,7 @@ CollisionShape2D
 AnimatedSprite2D
 CharacterBody2D
 Button
-Label
 VBoxContainer
 Panel
 CanvasLayer
 TextureRect
-Control
-TextEdit

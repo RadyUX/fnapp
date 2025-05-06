@@ -12,8 +12,10 @@ public partial class Mascot : CharacterBody2D
 	private NavigationAgent2D navAgent;
 	private Vector2 targetPos;
 	private RandomNumberGenerator rng = new();
+	public string name = "???";
 
 	public override void _Ready()
+	
 	{
 		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	   sprite.Play("default");
@@ -36,6 +38,21 @@ public partial class Mascot : CharacterBody2D
 	}
 
 	}
+
+	public void SetNameTag(string newName)
+{
+	name = newName;
+
+	var nameLabel = GetNodeOrNull<Label>("NameLabel");
+	if (nameLabel != null)
+	{
+		nameLabel.Text = name;
+	}
+	else
+	{
+		GD.PrintErr("⚠️ NameLabel non trouvé !");
+	}
+}
 
 
 	public override void _Process(double delta)

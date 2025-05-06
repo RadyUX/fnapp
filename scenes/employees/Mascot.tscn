@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhltqv0w62flj"]
+[gd_scene load_steps=7 format=3 uid="uid://dvxhxkvar0s8n"]
 
 [ext_resource type="Script" uid="uid://bufui3jp1j05x" path="res://scenes/employees/Mascot.cs" id="1_r74tv"]
 [ext_resource type="Texture2D" uid="uid://tgeqviy2fgia" path="res://assets/mascot_1.png" id="2_yjx0p"]
@@ -22,6 +22,10 @@ animations = [{
 radius = 45.0
 height = 150.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_r74tv"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
 [node name="Mascot" type="CharacterBody2D"]
 script = ExtResource("1_r74tv")
 
@@ -36,3 +40,12 @@ position = Vector2(22, -26)
 shape = SubResource("CapsuleShape2D_xck84")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -1.0
+offset_top = -129.0
+offset_right = 39.0
+offset_bottom = -106.0
+text = "?????"
+label_settings = SubResource("LabelSettings_r74tv")
+uppercase = true

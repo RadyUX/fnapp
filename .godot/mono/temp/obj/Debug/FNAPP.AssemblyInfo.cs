@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FNAPP")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4adb9f9ecfa8454f1ff55b32ceaa17a23051f959")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b41821d752fa89031e6eee021acedb4dfb70c42")]
 [assembly: System.Reflection.AssemblyProductAttribute("FNAPP")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FNAPP")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

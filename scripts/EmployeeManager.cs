@@ -12,6 +12,14 @@ public partial class EmployeeManager : Node
 	private List<Waiter> activeWaiters = new List<Waiter>();
 
 	private int employeeCount = 0;
+	private List<string> availableNames = new()
+	{
+		"Pepito", "Luigi", "Frederic", "Benoit", "William", "Henry", "Fitz"
+	};
+
+	private List<string> usedNames = new();
+
+	
 
 	public void RegisterEmployee()
 	{
@@ -67,6 +75,10 @@ public partial class EmployeeManager : Node
 
 	GD.Print("👨‍🍳 Nouveau cuisinier spawn à 8h !");
 	RegisterEmployee(); 
+
+	string name = AssignEmployeeName();
+	cookerInstance.name = name;
+	cookerInstance.SetNameTag(name);
 }
 
 
@@ -92,6 +104,10 @@ var mascotScene = GD.Load<PackedScene>("res://scenes/employees/Mascot.tscn");
 		currentMascot = mascotInstance;
 		GD.Print("🤡 Mascot spawné !");
 		RegisterEmployee(); 
+
+	string name = AssignEmployeeName();
+	mascotInstance.name = name;
+	mascotInstance.SetNameTag(name);
 	}
 
 	
@@ -131,7 +147,28 @@ public void SpawnWaiter()
 	};
 
 	GD.Print("🧍‍♂️ Serveur spawné ! (" + activeWaiters.Count + "/" + maxWaiters + ")");
-	RegisterEmployee(); // optionnel si tu veux une autre logique
+	RegisterEmployee(); 
+
+	string name = AssignEmployeeName();
+	waiterInstance.name = name;
+	waiterInstance.SetNameTag(name);
 }
 
+
+public string AssignEmployeeName(){
+	if(availableNames.Count == 0){
+		return "Anonyme";
+	}
+
+int index = (int)(GD.Randi() % (ulong)availableNames.Count);
+
+	string chosenName = availableNames[index];
+	
+	availableNames.RemoveAt(index);
+		usedNames.Add(chosenName);
+
+	return chosenName;
+
+}
+	
  }

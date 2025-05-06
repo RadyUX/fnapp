@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5imt06f1rulm"]
+[gd_scene load_steps=7 format=3 uid="uid://c5imt06f1rulm"]
 
 [ext_resource type="Script" uid="uid://cv2qtpoujc2fg" path="res://scenes/employees/Cooker.cs" id="1_rqa0d"]
 [ext_resource type="Texture2D" uid="uid://ctisc7otu2yd2" path="res://assets/cuisinier_1.png" id="2_2mfbb"]
@@ -22,6 +22,10 @@ animations = [{
 radius = 25.0
 height = 94.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_rqa0d"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
 [node name="Cooker" type="CharacterBody2D" node_paths=PackedStringArray("Character")]
 collision_layer = 2
 collision_mask = 2
@@ -41,3 +45,11 @@ position = Vector2(15, -28)
 shape = SubResource("CapsuleShape2D_1bc14")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -7.0
+offset_top = -126.0
+offset_right = 33.0
+offset_bottom = -103.0
+label_settings = SubResource("LabelSettings_rqa0d")
+uppercase = true

@@ -9,7 +9,7 @@ public partial class DayAndNightCycleManager : Node
 	public readonly float GAME_MINUTE_DURATION;
 
 	// ⚙️ Paramètres de jeu
-	public float GameSpeed = 5.0f;
+	public float GameSpeed = 50.0f;
 
 	// 🕒 Données initiales
 	public int InitialDay = 1;
@@ -89,7 +89,7 @@ public void setInitialTime()
 	if (hour == 22 && minute == 0)
 	{
 		GD.Print("🌙 Il est 22h — on ferme !");
-
+		
 		var panel = GetTree().CurrentScene.FindChild("EndOfDayPanel", true, false);
 
 if (panel == null)
@@ -99,17 +99,49 @@ if (panel == null)
 else
 {
 	GD.Print("✅ EndOfDayPanel trouvé !");
+	
+	
 	panel.Call("show_summary");
 }
 
 
+var musicPlayer = GetNodeOrNull<AudioStreamPlayer>("/root/Restaurant/ClosingMusicPlayer");
+
+	if (musicPlayer != null)
+	{
+		if (!musicPlayer.Playing)
+		{
+			musicPlayer.Play();
+		}
+		else
+		{
+			GD.Print("🎵 Musique déjà en cours.");
+		}
+	}
+	else
+	{
+		GD.PrintErr("❌ AudioStreamPlayer 'ClosingMusicPlayer' introuvable !");
+	}
 		EmitSignal(nameof(ClosingTime));
+	 
+	 
+
 	}
 if (hour == 8 && minute == 0)
 {
 	GD.Print("☀️ Il est 8h du mat !");
 	var manager = GetNodeOrNull("/root/EmployeeManager"); // ou ton singleton réel
+	var musicPlayer = GetNodeOrNull<AudioStreamPlayer>("/root/Restaurant/ClosingMusicPlayer");
+	if (musicPlayer != null)
+	{
+		if (musicPlayer.Playing)
+		{
+			musicPlayer.Stop();
+			GD.Print("🔇 Musique de fermeture arrêtée !");
+		}
+	}
 	manager?.Call("SpawnCooker");
+	GameStats.Instance.CheckMurderRisk(); // 💀 Ajout ici
 }
 
 }

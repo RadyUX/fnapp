@@ -6,7 +6,20 @@ public partial class GameManager : Node
 	private static readonly Resource ITEM_PIZZACUITE = GD.Load<Resource>("res://data/PizzaCuite.tres");
 	
 	private static readonly Random _rng = new Random();
+	public int DaysPassed = 0;
 	
+
+
+	public override void _Ready()
+{
+	var cycle = GetNodeOrNull<DayAndNightCycleManager>("/root/DayAndNightCycleManager");
+
+	if (cycle != null)
+	{
+		cycle.TimeTickDay += OnNewDay;
+	}
+}
+
 	public Resource getRandomItem()
 	{
 		  
@@ -15,4 +28,20 @@ public partial class GameManager : Node
 		return items[index];
 	
 	}
+
+
+	public void AdvanceDay()
+{
+	DaysPassed++;
+	GameStats.Instance.DecreaseSafetyDaily(5);
+	
+
+}
+
+private void OnNewDay(int day)
+{
+	GD.Print($"📅 NOUVEAU JOUR {day} ➤ Appel de AdvanceDay()");
+	AdvanceDay();
+}
+
 }

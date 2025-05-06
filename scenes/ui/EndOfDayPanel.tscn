@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpei5fw8l5m6a"]
+[gd_scene load_steps=9 format=3 uid="uid://0wevhdwqdlj2"]
 
 [ext_resource type="Script" uid="uid://dch0rrvu3glog" path="res://scenes/ui/endof_day_panel.gd" id="1_6f65o"]
 
@@ -11,7 +11,7 @@ border_width_bottom = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_m3iha"]
 font_size = 30
-font_color = Color(0.973143, 0.558016, 1, 1)
+font_color = Color(0.774687, 0, 0.17203, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4dmbu"]
 font_size = 30
@@ -29,7 +29,6 @@ font_size = 30
 font_size = 30
 
 [node name="EndOfDayPanel" type="CanvasLayer"]
-visible = false
 script = ExtResource("1_6f65o")
 
 [node name="Panel" type="Panel" parent="."]
@@ -94,11 +93,17 @@ size_flags_horizontal = 4
 text = "QQQQ"
 label_settings = SubResource("LabelSettings_frt5u")
 
-[node name="CloseButton" type="Button" parent="Panel"]
-custom_minimum_size = Vector2(100, 100)
+[node name="MurdererLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-offset_left = 218.0
-offset_top = 303.0
-offset_right = 498.0
-offset_bottom = 403.0
+size_flags_horizontal = 4
+text = "Le tueur est en liberté"
+label_settings = SubResource("LabelSettings_m3iha")
+
+[node name="CloseButton" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+offset_left = 337.0
+offset_top = 350.0
+offset_right = 387.0
+offset_bottom = 400.0
 text = "OK"
