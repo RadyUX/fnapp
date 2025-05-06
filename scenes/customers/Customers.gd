@@ -60,12 +60,12 @@ func receive_item(item_name: String, inventory: Inventory):
 	print("donne argent")
 	var total_gain = request_quantity * 3
 	GameStats.add_profit(total_gain)
+	print("🍕 PIZZA DONNÉE ➤ add_profit() appelé")
 	# Enlève les items maintenant
 	for i in range(request_quantity):
 		inventory.RemoveItem(item_name)
 
-	GameStats.add_profit(request_quantity * 3)
-	print("🍕 Commande livrée par un serveur !")
+	
 
 
 	$cash_sound.play()

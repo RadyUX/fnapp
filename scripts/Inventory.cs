@@ -21,6 +21,7 @@ public partial class Inventory : Node
 	
 		Items.Add("pizza_cuite");
 		Items.Add("pizza_cuite");
+			Items.Add("pizza_cuite");
 	}
 
 	public void AddItem(string itemName)

@@ -9,7 +9,7 @@ public partial class DayAndNightCycleManager : Node
 	public readonly float GAME_MINUTE_DURATION;
 
 	// ⚙️ Paramètres de jeu
-	public float GameSpeed = 50.0f;
+	public float GameSpeed = 5.0f;
 
 	// 🕒 Données initiales
 	public int InitialDay = 1;
@@ -88,6 +88,9 @@ public void setInitialTime()
 	}
 	if (hour == 22 && minute == 0)
 	{
+
+		GameStats.Instance.EndOfDay();
+
 		GD.Print("🌙 Il est 22h — on ferme !");
 		
 		var panel = GetTree().CurrentScene.FindChild("EndOfDayPanel", true, false);
@@ -141,7 +144,7 @@ if (hour == 8 && minute == 0)
 		}
 	}
 	manager?.Call("SpawnCooker");
-	GameStats.Instance.CheckMurderRisk(); // 💀 Ajout ici
+	
 }
 
 }

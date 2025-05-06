@@ -5,189 +5,166 @@ public partial class GameStats : Node
 {
 	public static GameStats Instance;
 
-	[ExportGroup("Stats")]
-	[Export] public int Popularity = 0;           // ⭐ Célèbre ou pas
-	[Export] public int Entertainment = 0;         // 🎉 Shows, mascottes...
-	[Export] public int Profit = 0;                // 💰 Ce que tu gagnes après pertes
-	[Export] public int Safety = 100;              // 🔐 Sécurité du resto
-	[Export] public int Money = 0;              // 💵 Ton porte-monnaie
-	[Export] public int NewVisitors = 0;           // 👥 Visiteurs du jour
+	[Export] public int Popularity { get; set; } = 0;
+	[Export] public int Safety { get; set; } = 100;
+	[Export] public int Money { get; set; } = 0;
 
-	[ExportGroup("Malus")]
-	[Export] public int TaxRate = 0;               // 📊 % de taxe (calculé auto)
-	[Export] public int MoneyLoss = 0;             // 💸 Dépenses (réparations, taxes, achats...)
-	[Export] public int PopularityLoss = 0;        // 🔻 Perte de réputation (drames...)
+	[Export] public int Entertainment { get; set; } = 0;
+	[Export] public int PopularityLoss { get; set; } = 0;
+	[Export] public int TaxRate { get; set; } = 0;
 
-	// 🔻 Total des malus (argent + réputation)
-	public int Malus => MoneyLoss + PopularityLoss;
-
-
-	public int DailyIncome = 0;
-public int DailyEntertainmentRevenue = 0;
-public int DailyVisitorRevenue = 0;
-
-
+	private int DailyRevenue = 0;     // 💰 Total gagné aujourd'hui
+	private int DailyMalus = 0;       // 💀 Pertes de réputation (événements)
+	private int DailyGross = 0;       // 🧾 Revenu brut = ce qu'on a généré
+	private int DailyNet = 0;         // 🧮 Revenu net = ce qui reste après malus/taxes
 
 	public override void _Ready()
 	{
 		Instance = this;
-		UpdateProfit(); // au cas où
+		RecalculateStats();
+	}
+
+	// 🔁 Calcul des stats
+	public void RecalculateStats()
+	{
+		CalculateTaxRate();
 		UpdatePopularity();
 	}
 
-	// 📈 Recalcule la popularité globale
+	public void CalculateTaxRate()
+	{
+		TaxRate = Popularity / 10;
+		TaxRate = Mathf.Clamp(TaxRate, 0, 30);
+	}
+
 	public void UpdatePopularity()
 	{
-		Popularity = Entertainment + Profit - PopularityLoss;
-		if (Popularity < 0)
-			Popularity = 0;
+		Popularity = Entertainment + DailyRevenue - PopularityLoss;
+		Popularity = Mathf.Max(Popularity, 0);
 	}
 
-	// 💰 Recalcule le vrai profit du jour
-	public void UpdateProfit()
+	// 📥 Ajoute un gain direct (pizza, serveur, etc.)
+	public void AddProfit(int amount)
 	{
-		Profit = GetGrossProfit() - MoneyLoss;
-		if (Profit < 0)
-			Profit = 0;
-
+		Money += amount;
+		DailyRevenue += amount;
+		GD.Print($"💰 Gagné +{amount}€, Wallet : {Money}€");
 		UpdatePopularity();
 	}
 
-	// 🧮 Calcule les revenus avant pertes (personnalisable selon ton gameplay)
-	public int GetGrossProfit()
+	// 🎊 Ajoute du divertissement
+	public void AddEntertainment(int amount)
 	{
-		// Exemple : 1€ par point de divertissement + 5€ par visiteur
-		return (Entertainment * 1) + (NewVisitors * 5);
+		Entertainment += amount;
+		UpdatePopularity();
 	}
 
-	// 📤 Ajoute un revenu direct (argent et bonus brut)
-	public void AddProfit(int amount)
+	// 📉 Ajoute un malus à la popularité
+	public void ApplyPopularityLoss(int amount)
 	{
-
-		GD.Print($"[💰 AddProfit] +{amount}$ ajoutés !");
-		Money += amount;
-		Profit += amount;
-		
+		PopularityLoss += amount;
+		UpdatePopularity();
 	}
 
-	public void FinalizeDay()
+	// 🔐 Baisse de sécurité quotidienne
+	public void DecreaseSafety(int amount = 5)
+	{
+		Safety -= amount;
+		if (Safety < 0)
+			Safety = 0;
+		GD.Print($"🔐 Sécurité -{amount}, actuelle : {Safety}");
+	}
+
+	// 📅 Fin de journée
+	private bool hasEndedToday = false;
+
+public void EndOfDay()
 {
-	DailyEntertainmentRevenue = Entertainment * 1;
-	DailyVisitorRevenue = NewVisitors * 5;
+	if (hasEndedToday)
+	{
+		GD.Print("⏱ EndOfDay() déjà appelé !");
+		return;
+	}
+	hasEndedToday = true;
 
-	int earned = DailyEntertainmentRevenue + DailyVisitorRevenue;
+	// ⏳ FIN DE JOURNÉE ICI
+	RecalculateStats();
+	CheckMurderRisk();
 
-	// ✅ Inclure aussi les gains ajoutés via AddProfit
-	earned += Profit; // ou stocker séparément les gains serveurs
+	DailyGross = DailyRevenue;
+	int taxes = GetTaxes();
+	DailyMalus = PopularityLoss;
+	DailyNet = DailyGross - taxes - DailyMalus;
+	DailyNet = Mathf.Max(DailyNet, 0);
 
-	Profit = earned - MoneyLoss;
-	if (Profit < 0)
-		Profit = 0;
+	Money -= taxes;
+	Money += DailyNet;
 
-	AddProfit(Profit); // le rajoute à Money
+	GD.Print($"📅 Fin du jour !\n🍕 Revenu : {DailyGross}€\n📉 Malus : {DailyMalus}\n📊 Taxes : -{taxes}€\n💼 Wallet : {Money}€");
 
-	GD.Print($"💰 Fin du jour : +{DailyEntertainmentRevenue} (fun) +{DailyVisitorRevenue} (clients) +{Profit} (serveur) -{MoneyLoss} = {Profit}€ net");
+	DecreaseSafety();
 
-	UpdatePopularity();
+	RecalculateStats();
 }
 
+public void ResetDay()
+{
+	hasEndedToday = false;
+}
 
-	// 💸 Dépense de l’argent (achat, réparation, etc.)
-	public void SpendMoney(int amount)
+	public int GetTaxes()
 	{
-		Money -= amount;
-		MoneyLoss += amount;
-		UpdateProfit();
+		return Mathf.FloorToInt(DailyRevenue * (TaxRate / 100f));
 	}
 
-	// 🎊 Ajoute du divertissement (par show, animatronique…)
-	public void AddEntertainment(int value)
+	public void CheckMurderRisk()
 	{
-		Entertainment += value;
-		UpdateProfit();
+		int risk = 100 - Safety;
+		int roll = GD.RandRange(0, 99);
+		GD.Print($"🎲 Risque de meurtre : {risk}% | Jet : {roll}");
+
+		if (roll < risk)
+		{
+			GD.Print("💀 MEURTRE ! La sécurité était trop basse.");
+			ApplyMurderPenalty();
+		}
 	}
 
-	// 📊 Applique la taxe en fin de journée selon la popularité
-	public void ApplyTax()
-	{
-		TaxRate = Popularity / 10; // +1% tous les 10 points
-		int taxAmount = (int)(GetGrossProfit() * (TaxRate / 100.0));
-
-		GD.Print($"📊 Popularité : {Popularity} ➔ Taxe : {TaxRate}%");
-		GD.Print($"💸 Taxe appliquée : -{taxAmount}€");
-
-		Money -= taxAmount;
-		MoneyLoss += taxAmount;
-
-		UpdateProfit();
-	}
-
-	
 	public void ApplyMurderPenalty()
-{
-	int loss = 100_000;
-	PopularityLoss += loss;
-
-	GD.Print("🩸 Meurtre détecté ! Popularité -100 000");
-	UpdatePopularity();
-}
-
-public void DecreaseSafetyDaily(int amount = 5)
-{
-	Safety -= amount;
-
-	if (Safety < 0)
-		Safety = 0;
-
-	GD.Print($"🔐 Sécurité baissée de {amount} ➔ Niveau actuel : {Safety}");
-
-	
-}
-
-
-public void CheckMurderRisk()
-{
-	int risk = 100 - Safety; // Plus c’est bas, plus c’est risqué
-	int roll = GD.RandRange(0, 99); // ou GD.Randi() % 100
-
-	GD.Print($"🎲 Risque de meurtre : {risk}% | Jet : {roll}");
-
-	if (roll < risk)
 	{
-		GD.Print("💀 MEURTRE ! La sécurité était trop basse.");
-		ApplyMurderPenalty();
-
-	
+		int loss = 100_000;
+		PopularityLoss += loss;
+		GD.Print("🩸 Meurtre détecté ! Popularité -100 000");
+		UpdatePopularity();
 	}
-}
 
+	// === Exposés à GDScript ===
+	public void end_of_day() => EndOfDay();
+	public void add_profit(int amount) => AddProfit(amount);
+	public void add_entertainment(int amount) => AddEntertainment(amount);
+	public void apply_popularity_loss(int amount) => ApplyPopularityLoss(amount);
 
-
-public Godot.Collections.Array GetEndOfDaySummary()
-{
-	int income = Profit;
-	int taxRate = Popularity / 10;
-	int taxes = (int)(income * (taxRate / 100.0));
-	int malus = PopularityLoss;
-	int net = income - taxes - malus;
-	net = Math.Max(net, 0);
-
-	return new Godot.Collections.Array { taxRate, taxes, malus, net };
-}
-
-	// === Compatibilité GDScript ===
+	public int money
+	{
+		get => Money;
+		set => Money = value;
+	}
 	public int popularity => Popularity;
-	public int money => Money;
 	public int safety => Safety;
 	public int entertainment => Entertainment;
+	public int profit => DailyRevenue;
 
-		// === Méthodes accessibles depuis GDScript ===
-	public void add_profit(int amount) => AddProfit(amount);
-	public void spend_money(int amount) => SpendMoney(amount);
-	public void add_entertainment(int value) => AddEntertainment(value);
-	public void apply_tax() => ApplyTax();
-	
-	
-	
-
+	public Godot.Collections.Dictionary get_summary() => GetSummary();
+	public Godot.Collections.Dictionary GetSummary()
+	{
+		return new Godot.Collections.Dictionary
+		{
+			{ "tax_rate", TaxRate },
+			{ "taxes", GetTaxes() },
+			{ "malus", DailyMalus },
+			{ "net", DailyNet },
+			{ "gross", DailyGross },
+			{ "popularity", Popularity }
+		};
+	}
 }
