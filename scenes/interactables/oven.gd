@@ -99,7 +99,7 @@ func _on_interact():
 	sprite_2d.play("cook")
 	print("🔥 Cuisson de la pizza...")
 
-	await get_tree().create_timer(10.0).timeout
+	await get_tree().create_timer(2.0).timeout
 
 	sprite_2d.stop()
 	print("✅ Pizza cuite prête")

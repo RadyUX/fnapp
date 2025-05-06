@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+@onready var shop_panel_ui: CanvasLayer = $"."
 
 @onready var new_cooker_1: Button = $Panel/TabContainer/Employees/VBoxContainer/NewCooker/newCooker1
 @onready var new_mascot: Button = $Panel/TabContainer/Employees/VBoxContainer/NewMascot/newMascot
@@ -13,8 +14,12 @@ func _ready():
 	new_cooker_1.pressed.connect(_on_new_cooker_1_pressed)
 	new_mascot.pressed.connect(_on_new_mascot_1_pressed)
 	new_waiter_1.pressed.connect(_on_new_waiter_1_pressed)
+	DayAndNightCycleManager.ClosingTime.connect(_on_closing_time)
 
 
+func _on_closing_time():
+	shop_panel_ui.hide()
+	
 func _on_new_cooker_1_pressed():
 	var manager = EmployeeManager
 
@@ -45,6 +50,6 @@ func _on_new_waiter_1_pressed():
 		if manager:
 			manager.SpawnWaiter() 
 	else:
-		print("❌ Pas assez d'argent pour acheter le mascot.")
+		print("❌ Pas assez d'argent pour acheter le serveur")
 			
 		

@@ -122,7 +122,7 @@ _navAgent?.SetVelocity(Vector2.Zero);
 	}
 
 	var target = stationInstances[currentStationIndex].GlobalPosition;
-	GD.Print($"🎯 Déplacement vers la station #{currentStationIndex} à {target}");
+	
 
 	_navAgent.TargetPosition = target;
 

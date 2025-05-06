@@ -1,15 +1,20 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 public partial class EmployeeManager : Node
 {
 
+public static EmployeeManager Instance;
 	private Cooker currentCooker;
 	private Mascot currentMascot;
 
 	private Waiter currentWaiter;
 	private int maxWaiters = 3;
 	private List<Waiter> activeWaiters = new List<Waiter>();
+
+	public List<HiredEmployee> HiredEmployees = new();
+	
 
 	private int employeeCount = 0;
 	private List<string> availableNames = new()
@@ -19,7 +24,12 @@ public partial class EmployeeManager : Node
 
 	private List<string> usedNames = new();
 
-	
+	public class HiredEmployee
+	{
+		public string Role;
+		public string Name;
+		public Vector2 SpawnPosition;
+	}
 
 	public void RegisterEmployee()
 	{
@@ -27,6 +37,12 @@ public partial class EmployeeManager : Node
 		UpdateSecurity();
 
 		
+	}
+
+
+	public override void _Ready()
+	{
+		Instance = this;
 	}
 
 	private void UpdateSecurity()
@@ -79,6 +95,12 @@ public partial class EmployeeManager : Node
 	string name = AssignEmployeeName();
 	cookerInstance.name = name;
 	cookerInstance.SetNameTag(name);
+	HiredEmployees.Add(new HiredEmployee {
+	Role = "Cooker",
+	Name = name,
+	SpawnPosition = cookerInstance.GlobalPosition
+});
+
 }
 
 
@@ -108,6 +130,11 @@ var mascotScene = GD.Load<PackedScene>("res://scenes/employees/Mascot.tscn");
 	string name = AssignEmployeeName();
 	mascotInstance.name = name;
 	mascotInstance.SetNameTag(name);
+	HiredEmployees.Add(new HiredEmployee {
+	Role = "Mascot",
+	Name = name,
+	SpawnPosition = mascotInstance.GlobalPosition
+});
 	}
 
 	
@@ -152,6 +179,11 @@ public void SpawnWaiter()
 	string name = AssignEmployeeName();
 	waiterInstance.name = name;
 	waiterInstance.SetNameTag(name);
+	HiredEmployees.Add(new HiredEmployee {
+	Role = "Waiter",
+	Name = name,
+	SpawnPosition = waiterInstance.GlobalPosition
+});
 }
 
 
@@ -170,5 +202,75 @@ int index = (int)(GD.Randi() % (ulong)availableNames.Count);
 	return chosenName;
 
 }
+public void RespawnAllEmployees()
+{
+	// 🔁 Supprimer les anciens employés
+	foreach (Node node in GetTree().CurrentScene.GetChildren())
+	{
+		if (node is Cooker || node is Mascot || node is Waiter)
+			node.QueueFree();
+	}
+
+	// 🔁 Respawn depuis HiredEmployees
+	foreach (var emp in HiredEmployees)
+	{
+		string path = $"res://scenes/employees/{emp.Role}.tscn";
+		var scene = GD.Load<PackedScene>(path);
+
+		if (emp.Role == "Cooker")
+		{
+			var cooker = scene.Instantiate() as Cooker;
+			if (cooker == null) continue;
+
+			cooker.GlobalPosition = emp.SpawnPosition;
+			cooker.Name = emp.Name;
+			cooker.SetNameTag(emp.Name);
+			GetTree().CurrentScene.AddChild(cooker);
+
+			var oven = GetTree().CurrentScene.FindChild("Oven", true, false) as Node2D;
+			if (oven != null)
+				cooker.SetStations(new List<Node2D> { oven });
+
+			continue;
+		}
+
+		if (emp.Role == "Waiter")
+		{
+			var waiter = scene.Instantiate() as Waiter;
+			if (waiter == null) continue;
+
+			waiter.GlobalPosition = emp.SpawnPosition;
+			waiter.Name = emp.Name;
+			waiter.SetNameTag(emp.Name);
+			GetTree().CurrentScene.AddChild(waiter);
+			continue;
+		}
+
+		if (emp.Role == "Mascot")
+		{
+			var mascot = scene.Instantiate() as Mascot;
+			if (mascot == null) continue;
+
+			mascot.GlobalPosition = emp.SpawnPosition;
+			mascot.Name = emp.Name;
+			mascot.SetNameTag(emp.Name);
+			GetTree().CurrentScene.AddChild(mascot);
+			continue;
+		}
+	}
+}
+
+public void RemoveAllEmployees()
+{
+	foreach (Node node in GetTree().CurrentScene.GetChildren())
+	{
+		if (node is Cooker || node is Mascot || node is Waiter)
+		{
+			node.QueueFree();
+			GD.Print($"👋 {node.Name} est rentré chez lui.");
+		}
+	}
+}
+
 	
  }

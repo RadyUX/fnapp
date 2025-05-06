@@ -28,3 +28,6 @@ res://scripts/DayAndNightCycleManager.cs
 res://scenes/ui/endof_day_panel.gd
 res://scenes/ui/game_stat_ui.gd
 res://scenes/customers/Customers.gd
+res://scenes/ui/shop_panel_ui.gd
+res://scenes/restaurant/buttons.gd
+res://scenes/interactables/oven.gd

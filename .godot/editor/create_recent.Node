@@ -1,6 +1,9 @@
+Label
+Panel
+ColorRect
+CanvasLayer
 AudioStreamPlayer
 AudioStreamPlayer2D
-Label
 NavigationRegion2D
 Node2D
 NavigationAgent2D
@@ -9,6 +12,3 @@ AnimatedSprite2D
 CharacterBody2D
 Button
 VBoxContainer
-Panel
-CanvasLayer
-TextureRect

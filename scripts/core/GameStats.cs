@@ -7,7 +7,7 @@ public partial class GameStats : Node
 
 	[Export] public int Popularity { get; set; } = 0;
 	[Export] public int Safety { get; set; } = 100;
-	[Export] public int Money { get; set; } = 0;
+	[Export] public int Money { get; set; } = 10000;
 
 	[Export] public int Entertainment { get; set; } = 0;
 	[Export] public int PopularityLoss { get; set; } = 0;
@@ -99,6 +99,13 @@ public void EndOfDay()
 
 	Money -= taxes;
 	Money += DailyNet;
+
+int lossMoney = PopularityLoss * 2;
+Money -= lossMoney;
+DailyNet -= lossMoney; // refléter la vraie perte dans le résumé
+
+GD.Print($"😖 Popularité -{PopularityLoss} ➜ Perte d'argent : -{lossMoney}€");
+
 
 	GD.Print($"📅 Fin du jour !\n🍕 Revenu : {DailyGross}€\n📉 Malus : {DailyMalus}\n📊 Taxes : -{taxes}€\n💼 Wallet : {Money}€");
 
