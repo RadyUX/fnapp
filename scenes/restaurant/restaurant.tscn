@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bnpokhgwn0njq"]
+[gd_scene load_steps=22 format=4 uid="uid://bnpokhgwn0njq"]
 
 [ext_resource type="Script" uid="uid://s808k7lnid1f" path="res://scenes/restaurant/restaurant.gd" id="1_iicbp"]
 [ext_resource type="PackedScene" uid="uid://1ns87l4tsgcy" path="res://scenes/DayAndNightCycleComponent.tscn" id="2_6whu3"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://gxj4th4wwtk3" path="res://scenes/ui/shopPanelUi.tscn" id="14_61y4y"]
 [ext_resource type="PackedScene" uid="uid://0wevhdwqdlj2" path="res://scenes/ui/EndOfDayPanel.tscn" id="14_penpo"]
 [ext_resource type="AudioStream" uid="uid://dtjbkcsdmwyk7" path="res://assets/ambiance.mp3" id="16_6gsge"]
+[ext_resource type="PackedScene" uid="uid://nhjqqsko7br5" path="res://scenes/ui/MurderPanel.tscn" id="17_ayhsx"]
 
 [sub_resource type="Gradient" id="Gradient_6whu3"]
 offsets = PackedFloat32Array(0.0178571, 0.125, 0.208333, 0.285714, 1)
@@ -117,3 +118,5 @@ text = "open shop"
 
 [node name="ClosingMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_6gsge")
+
+[node name="MurderPanel" parent="." instance=ExtResource("17_ayhsx")]

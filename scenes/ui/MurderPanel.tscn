@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://nhjqqsko7br5"]
+
+[ext_resource type="Script" uid="uid://cnwv26k7olxx8" path="res://scenes/ui/murder_panel.gd" id="1_7bmod"]
+[ext_resource type="Texture2D" uid="uid://duuxejaaf3egm" path="res://assets/cryingchild.png" id="2_rpwcq"]
+[ext_resource type="AudioStream" uid="uid://dxj100u7t2r5c" path="res://assets/FNAF 3 Springtrap rare screen sound.mp3" id="3_h3x3o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7erp4"]
+font_size = 30
+font_color = Color(1, 0, 0, 1)
+
+[node name="MurderPanel" type="CanvasLayer"]
+script = ExtResource("1_7bmod")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(700, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(700, 500)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -351.0
+offset_top = -298.0
+offset_right = 349.0
+offset_bottom = 299.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BodyDiscoveredLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.5
+offset_top = -23.5
+offset_right = 179.5
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Un corp a été découvert..."
+label_settings = SubResource("LabelSettings_7erp4")
+
+[node name="Body" type="TextureRect" parent="Panel"]
+offset_left = 245.0
+offset_top = 381.0
+offset_right = 433.0
+offset_bottom = 569.0
+texture = ExtResource("2_rpwcq")
+expand_mode = 1
+
+[node name="Close" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -55.0
+offset_top = 109.0
+offset_right = 45.0
+offset_bottom = 209.0
+grow_horizontal = 2
+text = "OK"
+flat = true
+
+[node name="ScreamerAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h3x3o")
+volume_db = -4.643

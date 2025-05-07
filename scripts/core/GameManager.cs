@@ -33,8 +33,11 @@ public partial class GameManager : Node
 	public void AdvanceDay()
 {
 	DaysPassed++;
-	GameStats.Instance.DecreaseSafety(5);
-	GameStats.Instance.CheckMurderRisk();
+	GameStats.Instance.DecreaseSafety();
+	GameStats.Instance.ResetDay();
+
+
+
 	
 
 }

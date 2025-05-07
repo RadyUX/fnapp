@@ -111,8 +111,10 @@ GD.Print($"😖 Popularité -{PopularityLoss} ➜ Perte d'argent : -{lossMoney}�
 	GD.Print($"📅 Fin du jour !\n🍕 Revenu : {DailyGross}€\n📉 Malus : {DailyMalus}\n📊 Taxes : -{taxes}€\n💼 Wallet : {Money}€");
 
 	DecreaseSafety();
+	
 
 	RecalculateStats();
+	CheckMurderRisk();
 }
 
 public void ResetDay()
@@ -124,27 +126,39 @@ public void ResetDay()
 	{
 		return Mathf.FloorToInt(DailyRevenue * (TaxRate / 100f));
 	}
+public void CheckMurderRisk()
+{
+	int risk = 100 - Safety;
+	int roll = GD.RandRange(0, 99); // ← 0 à 99, pas 0 à 1
+	GD.Print($"🎲 Risque de meurtre : {risk}% | Jet : {roll}");
 
-	public void CheckMurderRisk()
+
+	if (roll < risk)
 	{
-		int risk = 100 - Safety;
-		int roll = GD.RandRange(0, 99);
-		GD.Print($"🎲 Risque de meurtre : {risk}% | Jet : {roll}");
-
-		if (roll < risk)
-		{
-			GD.Print("💀 MEURTRE ! La sécurité était trop basse.");
-			ApplyMurderPenalty();
-		}
+		GD.Print("💀 MEURTRE ! La sécurité était trop basse.");
+		ApplyMurderPenalty(); // 💥 ici on gère TOUT
 	}
+}
+
 
 	public void ApplyMurderPenalty()
+{
+	int loss = 100_000;
+	PopularityLoss += loss;
+	GD.Print("🩸 Meurtre détecté ! Popularité -100 000");
+	DailyMalus += loss;
+
+	// 👉 Affiche le panneau maintenant
+	var panel = GetTree().Root.FindChild("MurderPanel", true, false);
+	if (panel != null)
 	{
-		int loss = 100_000;
-		PopularityLoss += loss;
-		GD.Print("🩸 Meurtre détecté ! Popularité -100 000");
-		UpdatePopularity();
+		var script = panel as GodotObject;
+		script.Call("trigger_murder_panel");
 	}
+
+	UpdatePopularity();
+}
+
 
 	// === Exposés à GDScript ===
 	public void end_of_day() => EndOfDay();
