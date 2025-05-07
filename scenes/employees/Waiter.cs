@@ -5,7 +5,7 @@ public partial class Waiter : CharacterBody2D
 {
 	[Export] public float Speed = 80f;
 	[Export] public string name = "pepito";
-    [Export] public string SkinName = "waiter_1";
+	[Export] public string SkinName = "waiter_1";
 	private NavigationAgent2D NavAgent;
 	private AnimatedSprite2D Sprite;
 	private Node2D currentTarget;
@@ -85,34 +85,32 @@ cashSound = GetNode<AudioStreamPlayer2D>("CashSound");
 	int quantity = 0;
 
 	foreach (Node node in GetTree().GetNodesInGroup("npc"))
-{
-	if (node is Node2D npc && npc.HasMeta("has_pizza") == false && npc.HasMethod("get_request_quantity"))
 	{
-		var result = npc.Call("get_request_quantity");
-		int rq = 0;
-try
-{
-	rq = (int)(long)result;
-}
-catch (Exception e)
-{
-	GD.PrintErr("❌ Erreur de cast get_request_quantity: " + e.Message);
-}
-
-
-		if (rq > 0)
+		if (node is Node2D npc 
+			&& IsInstanceValid(npc)
+			&& (!npc.HasMeta("in_delivery")
+|| !(bool)npc.GetMeta("in_delivery"))
+			&& npc.HasMeta("has_pizza") == false
+			&& npc.HasMethod("get_request_quantity"))
 		{
-			float dist = GlobalPosition.DistanceTo(npc.GlobalPosition);
-			if (dist < closestDistance)
+			var result = npc.Call("get_request_quantity");
+			int rq = 0;
+
+			try { rq = (int)(long)result; }
+			catch (Exception e) { GD.PrintErr("❌ Erreur de cast get_request_quantity: " + e.Message); }
+
+			if (rq > 0)
 			{
-				closestDistance = dist;
-				closestNpc = npc;
-				quantity = rq;
+				float dist = GlobalPosition.DistanceTo(npc.GlobalPosition);
+				if (dist < closestDistance)
+				{
+					closestDistance = dist;
+					closestNpc = npc;
+					quantity = rq;
+				}
 			}
 		}
 	}
-}
-
 
 	if (closestNpc == null)
 	{
@@ -120,16 +118,18 @@ catch (Exception e)
 		return;
 	}
 
+	// ➕ Marquer le NPC comme déjà pris en charge
+	closestNpc.SetMeta("in_delivery", true);
+
 	deliveryTarget = closestNpc;
 	pizzasToCollect = quantity;
 	GD.Print($"🎯 NPC cible : {closestNpc.Name} — Demande : {pizzasToCollect} pizza(s)");
 
-	// Cherche une pizza dispo
+	// ➕ Cherche une pizza dispo
 	foreach (Node node in GetTree().GetNodesInGroup("pizzacuite"))
 	{
 		if (node is Area2D pizza && pizza.HasMeta("taken") == false)
 		{
-			
 			pizza.SetMeta("taken", true);
 			currentTarget = pizza;
 			NavAgent.TargetPosition = pizza.GlobalPosition;
@@ -139,14 +139,14 @@ catch (Exception e)
 
 	GD.Print("❌ Aucune pizza trouvée pour commencer la commande.");
 
+	// ➖ Reset
 	deliveryTarget = null;
 	pizzasToCollect = 0;
 	currentTarget = null;
 
-	// Redémarre la boucle pour réessayer plus tard
 	StartPizzaLoop();
-
 }
+
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -190,13 +190,14 @@ catch (Exception e)
 		pizza.QueueFree(); // fallback
 	}
 
-	// Ajoute à l'inventaire
-	inventory.AddItem("pizza_cuite");
+	var playerInventory = (Inventory)GetTree().Root.GetNode("Inventory");
+	playerInventory.AddItem("pizza_cuite");
+
 
 	await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
 
 	// Vérifie combien de pizzas on a
-	int count = inventory.GetItemCount("pizza_cuite");
+	int count = playerInventory.GetItemCount("pizza_cuite");
 	GD.Print($"📦 Inventaire actuel : {count} / {pizzasToCollect}");
 
 	if (count < pizzasToCollect)
@@ -209,13 +210,21 @@ catch (Exception e)
 	{
 		hasPizza = true;
 		GD.Print("✅ Quantité atteinte ➤ direction NPC");
+
+		if (deliveryTarget == null)
+	{
+		GD.PrintErr("❌ deliveryTarget est null, impossible de livrer !");
+		return;
+	}
+
 		currentTarget = deliveryTarget;
 		NavAgent.TargetPosition = deliveryTarget.GlobalPosition;
 	}
+	
 }
 
 
-	private void DeliverToNPC(Node2D npc)
+private void DeliverToNPC(Node2D npc)
 {
 	GD.Print("🎁 Livraison au NPC : " + npc.Name);
 
@@ -223,46 +232,45 @@ catch (Exception e)
 	string requestedItem = npc.Call("get_request_item_name").AsString();
 	int quantity = (int)npc.Call("get_request_quantity");
 
-	int available = inventory.GetItemCount(requestedItem);
+	var playerInventory = (Inventory)GetTree().Root.GetNode("Inventory");
+	int available = playerInventory.GetItemCount(requestedItem);
 	GD.Print($"📦 Inventaire avant livraison : {available}/{quantity}");
 
 	if (available < quantity)
 	{
-		GD.Print("❌ Livraison refusée — pas assez d’items.");
+		GD.Print("❌ Pas assez d’items dans Inventory singleton !");
+		hasPizza = false;
+		currentTarget = null;
+		deliveryTarget = null;
+		StartPizzaLoop();
+		FindPizza();
 		return;
 	}
 
-var playerInventory = (Inventory)GetTree().Root.GetNode("Inventory");
+	// Retire les items
+	for (int i = 0; i < quantity; i++)
+		playerInventory.RemoveItem(requestedItem);
 
-if (playerInventory.GetItemCount(requestedItem) < quantity)
-{
-	GD.Print("❌ Pas assez d’items dans Inventory singleton !");
-	StartPizzaLoop();
-	return;
-}
+	// NPC reçoit les items
+	npc.Call("receive_item", requestedItem, playerInventory);
 
-for (int i = 0; i < quantity; i++)
-	playerInventory.RemoveItem(requestedItem);
-
-npc.Call("receive_item", requestedItem, playerInventory);
-
-
-	// Récompense le joueur
+	// Récompense
 	int totalGain = quantity * 3;
-	GameStats.Instance.AddProfit(totalGain); // Vérifie que cette méthode fait bien : profit += gain
+	GameStats.Instance.AddProfit(totalGain);
 
 	GD.Print("✅ Livraison acceptée !");
 	hasPizza = false;
 	currentTarget = null;
 	deliveryTarget = null;
 
-	npc.QueueFree(); // Le NPC disparaît
 	if (cashSound != null)
 		cashSound.Play();
-
-	StartPizzaLoop(); 
-	FindPizza();
+	npc.RemoveFromGroup("npc");
+	npc.QueueFree();
+	StartPizzaLoop();
+	FindPizza(); // 💡 Ceci garantit qu’il reparte bosser
 }
+
 public void OnClosingTime()
 {
 	GD.Print("🌙 Fermeture : le serveur rentre chez lui.");

@@ -43,6 +43,13 @@ public static EmployeeManager Instance;
 	public override void _Ready()
 	{
 		Instance = this;
+		for (int i = 0; i < 3; i++)
+	{
+		SpawnWaiter();
+	}
+	SpawnCooker();
+	SpawnMascot();
+
 	}
 
 	private void UpdateSecurity()

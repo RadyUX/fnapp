@@ -1,8 +1,10 @@
-res://scenes/restaurant/restaurant.tscn
-res://data/PizzaCuite.tres
+res://scenes/ui/shopPanelUi.tscn
 res://scenes/restaurant/carrelage.tres
 res://scenes/restaurant/walls.tres
 res://scenes/restaurant/texture.tres
+res://data/PizzaCuite.tres
+res://scenes/ui/shop_panel_ui.gd
+res://scenes/restaurant/restaurant.tscn
 res://scenes/customers/Customer.tscn
 res://scenes/player.tscn
 res://scenes/ui/InventoryUI.tscn
@@ -11,7 +13,6 @@ res://scenes/employees/Cooker.tscn
 res://scenes/interactables/oven.tscn
 res://scenes/interactables/pizzacru.tscn
 res://scenes/employees/Waiter.tscn
-res://scenes/ui/shopPanelUi.tscn
 res://scenes/employees/Mascot.tscn
 res://scenes/ui/EndOfDayPanel.tscn
 res://scenes/customers/StateMachine.cs
@@ -25,9 +26,3 @@ res://scenes/employees/Mascot.cs
 res://scenes/employees/Cooker.cs
 res://scripts/core/GameManager.cs
 res://scripts/DayAndNightCycleManager.cs
-res://scenes/ui/endof_day_panel.gd
-res://scenes/ui/game_stat_ui.gd
-res://scenes/customers/Customers.gd
-res://scenes/ui/shop_panel_ui.gd
-res://scenes/restaurant/buttons.gd
-res://scenes/interactables/oven.gd

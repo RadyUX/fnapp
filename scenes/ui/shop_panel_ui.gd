@@ -9,12 +9,15 @@ extends CanvasLayer
 @export var cooker_1_cost :int = 1000
 @export var mascot: int = 10
 @export var waiter: int = 500
+@export var max_waiter : int = 3
+
 
 func _ready():
 	new_cooker_1.pressed.connect(_on_new_cooker_1_pressed)
 	new_mascot.pressed.connect(_on_new_mascot_1_pressed)
 	new_waiter_1.pressed.connect(_on_new_waiter_1_pressed)
 	DayAndNightCycleManager.ClosingTime.connect(_on_closing_time)
+	update_waiter_button()
 
 
 func _on_closing_time():
@@ -43,12 +46,22 @@ func _on_new_mascot_1_pressed():
 	else:
 		print("❌ Pas assez d'argent pour acheter le mascot.")
 
+
+func update_waiter_button():
+	var current_waiters = get_tree().get_nodes_in_group("waiter").size()
+	new_waiter_1.disabled = current_waiters >= max_waiter
+
 func _on_new_waiter_1_pressed():
+	var current_waiters = get_tree().get_nodes_in_group("waiter").size()
+	if current_waiters >= max_waiter:
+		print("❌ Maximum atteint.")
+		return
 	var manager = EmployeeManager
 	if GameStats.Money >= waiter:
 		GameStats.Money -= waiter
 		if manager:
 			manager.SpawnWaiter() 
+			update_waiter_button()
 	else:
 		print("❌ Pas assez d'argent pour acheter le serveur")
 			

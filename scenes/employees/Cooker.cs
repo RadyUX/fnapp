@@ -113,7 +113,7 @@ _navAgent?.SetVelocity(Vector2.Zero);
 
 	private async void StartCookingCycle()
 {
-	GD.Print("🚶‍♂️ StartCookingCycle()");
+	
 
 	if (stationInstances.Count == 0)
 	{
@@ -185,8 +185,7 @@ _navAgent?.SetVelocity(Vector2.Zero);
 	if (_animatedSprite != null)
 		_animatedSprite.FlipH = direction.X < 0;
 
-		GD.Print($"🧭 Velocity actuelle : {Velocity}");
-GD.Print($"📍 Position actuelle : {GlobalPosition}");
+	
 
 }
 

@@ -7,7 +7,7 @@ public partial class GameStats : Node
 
 	[Export] public int Popularity { get; set; } = 0;
 	[Export] public int Safety { get; set; } = 100;
-	[Export] public int Money { get; set; } = 10000;
+	[Export] public int Money { get; set; } = 0;
 
 	[Export] public int Entertainment { get; set; } = 0;
 	[Export] public int PopularityLoss { get; set; } = 0;

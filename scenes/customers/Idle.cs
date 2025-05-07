@@ -34,7 +34,7 @@ public void OnEnter()
 		Character.Velocity = Vector2.Zero;
 
 	waitTimer.Start(waitTime);
-	GD.Print($"🛑 Entrée dans l'état IDLE pour {waitTime} sec");
+
 }
 	public void OnExit()
 	{
@@ -43,7 +43,7 @@ public void OnEnter()
 
 	private void OnWaitFinished()
 	{
-		GD.Print("🔁 Fin de l'Idle, retour à WALK !");
+		
 		EmitSignal("RequestStateChange", "Walk");
 	}
 }
