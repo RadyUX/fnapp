@@ -34,6 +34,7 @@ public partial class GameManager : Node
 {
 	DaysPassed++;
 	GameStats.Instance.DecreaseSafety(5);
+	GameStats.Instance.CheckMurderRisk();
 	
 
 }

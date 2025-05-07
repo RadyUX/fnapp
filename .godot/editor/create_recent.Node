@@ -1,9 +1,11 @@
-Node2D
+TextureRect
+AnimationPlayer
+AudioStreamPlayer
 Label
 Panel
 ColorRect
 CanvasLayer
-AudioStreamPlayer
+Node2D
 AudioStreamPlayer2D
 NavigationRegion2D
 NavigationAgent2D
@@ -11,4 +13,3 @@ CollisionShape2D
 AnimatedSprite2D
 CharacterBody2D
 Button
-VBoxContainer

@@ -20,6 +20,7 @@ func _ready():
 func _on_time_tick(day: int, hour: int, minute: int) -> void:
 	if hour == 8 and minute == 0:
 		print("☀️ Resto ouvert ! Timer relancé.")
+		current_count = 0
 		spawn_timer.start()
 
 func is_restaurant_closed() -> bool:

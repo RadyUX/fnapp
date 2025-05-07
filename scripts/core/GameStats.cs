@@ -21,6 +21,7 @@ public partial class GameStats : Node
 	public override void _Ready()
 	{
 		Instance = this;
+		 Safety = 100;
 		RecalculateStats();
 	}
 
@@ -89,7 +90,7 @@ public void EndOfDay()
 
 	// ⏳ FIN DE JOURNÉE ICI
 	RecalculateStats();
-	CheckMurderRisk();
+	
 
 	DailyGross = DailyRevenue;
 	int taxes = GetTaxes();

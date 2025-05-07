@@ -26,7 +26,7 @@ height = 150.0
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="Mascot" type="CharacterBody2D"]
+[node name="Mascot" type="CharacterBody2D" groups=["mascot"]]
 script = ExtResource("1_r74tv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
