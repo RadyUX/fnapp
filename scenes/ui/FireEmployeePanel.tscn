@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://djxjo58i216av"]
+
+[ext_resource type="Script" uid="uid://c66tn1kl0n6x3" path="res://scenes/ui/fire_employee_panel.gd" id="1_r4ixx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4ixx"]
+bg_color = Color(0.054902, 0.0666667, 0.160784, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.513726, 0.403922, 0.780392, 1)
+
+[node name="FireEmployeePanel" type="CanvasLayer"]
+script = ExtResource("1_r4ixx")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(500, 500)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4ixx")
+
+[node name="EmployeeList" type="VBoxContainer" parent="Panel"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.0
+offset_top = -107.0
+offset_right = 249.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2

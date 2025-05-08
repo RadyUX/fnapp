@@ -1,11 +1,14 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Godot.Collections;
+
 using System.Runtime.CompilerServices;
 public partial class EmployeeManager : Node
 {
 
-public static EmployeeManager Instance;
+	public static EmployeeManager Instance { get; private set; }
+
 	private Cooker currentCooker;
 	private Mascot currentMascot;
 
@@ -29,6 +32,8 @@ public static EmployeeManager Instance;
 		public string Role;
 		public string Name;
 		public Vector2 SpawnPosition;
+
+		
 	}
 
 	public void RegisterEmployee()
@@ -51,6 +56,21 @@ public static EmployeeManager Instance;
 	SpawnMascot();
 
 	}
+	public Godot.Collections.Array<Godot.Collections.Dictionary> GetHiredEmployees()
+{
+	var result = new Godot.Collections.Array<Godot.Collections.Dictionary>();
+	foreach (var emp in HiredEmployees)
+	{
+		var dict = new Godot.Collections.Dictionary
+		{
+			{ "name", emp.Name },
+			{ "role", emp.Role },
+			{ "position", emp.SpawnPosition }
+		};
+		result.Add(dict);
+	}
+	return result;
+}
 
 	private void UpdateSecurity()
 {
@@ -98,14 +118,17 @@ public static EmployeeManager Instance;
 
 	GD.Print("👨‍🍳 Nouveau cuisinier spawn à 8h !");
 	RegisterEmployee(); 
-
+	
 	string name = AssignEmployeeName();
 	cookerInstance.name = name;
 	cookerInstance.SetNameTag(name);
+	cookerInstance.AddToGroup("cooker");
+	cookerInstance.SetMeta("real_name", name);
 	HiredEmployees.Add(new HiredEmployee {
 	Role = "Cooker",
 	Name = name,
-	SpawnPosition = cookerInstance.GlobalPosition
+	SpawnPosition = cookerInstance.GlobalPosition,
+	
 });
 
 }
@@ -137,6 +160,9 @@ var mascotScene = GD.Load<PackedScene>("res://scenes/employees/Mascot.tscn");
 	string name = AssignEmployeeName();
 	mascotInstance.name = name;
 	mascotInstance.SetNameTag(name);
+	mascotInstance.AddToGroup("mascot");
+	mascotInstance.SetMeta("real_name", name);
+
 	HiredEmployees.Add(new HiredEmployee {
 	Role = "Mascot",
 	Name = name,
@@ -186,6 +212,8 @@ public void SpawnWaiter()
 	string name = AssignEmployeeName();
 	waiterInstance.name = name;
 	waiterInstance.SetNameTag(name);
+	waiterInstance.AddToGroup("waiter");
+	waiterInstance.SetMeta("real_name", name);
 	HiredEmployees.Add(new HiredEmployee {
 	Role = "Waiter",
 	Name = name,
@@ -232,6 +260,8 @@ public void RespawnAllEmployees()
 			cooker.GlobalPosition = emp.SpawnPosition;
 			cooker.Name = emp.Name;
 			cooker.SetNameTag(emp.Name);
+			cooker.AddToGroup("waiter");
+			cooker.SetMeta("real_name", emp.Name);
 			GetTree().CurrentScene.AddChild(cooker);
 
 			var oven = GetTree().CurrentScene.FindChild("Oven", true, false) as Node2D;
@@ -249,6 +279,8 @@ public void RespawnAllEmployees()
 			waiter.GlobalPosition = emp.SpawnPosition;
 			waiter.Name = emp.Name;
 			waiter.SetNameTag(emp.Name);
+			waiter.AddToGroup("waiter");
+			waiter.SetMeta("real_name", emp.Name);
 			GetTree().CurrentScene.AddChild(waiter);
 			continue;
 		}
@@ -261,6 +293,8 @@ public void RespawnAllEmployees()
 			mascot.GlobalPosition = emp.SpawnPosition;
 			mascot.Name = emp.Name;
 			mascot.SetNameTag(emp.Name);
+			mascot.AddToGroup("waiter");
+			mascot.SetMeta("real_name", emp.Name);
 			GetTree().CurrentScene.AddChild(mascot);
 			continue;
 		}
@@ -277,6 +311,69 @@ public void RemoveAllEmployees()
 			GD.Print($"👋 {node.Name} est rentré chez lui.");
 		}
 	}
+}
+
+public bool firedToday = false;
+public void FireEmployee(Dictionary empData){
+	   if (firedToday)
+	{
+		GD.Print("❌ Déjà licencié un employé aujourd'hui.");
+		return;
+	}
+
+	firedToday = true;
+	string empName = (string)empData["name"];
+Node employeeNode = null;
+string[] groups = { "waiter", "cooker", "mascot" };
+GD.Print("🔍 Recherche de : " + empName);
+
+foreach (string group in groups)
+{
+	foreach (var node in GetTree().GetNodesInGroup(group))
+	{
+		if (node is Node n && n.HasMeta("real_name"))
+		{
+			string realName = (string)n.GetMeta("real_name");
+			GD.Print($"👁️ Comparaison : {realName} vs {empName}");
+
+			if (realName.Trim().ToLower() == empName.Trim().ToLower())
+			{
+				employeeNode = n;
+				break;
+			}
+		}
+	}
+	if (employeeNode != null)
+		break;
+}
+
+	if (employeeNode != null)
+	{
+		employeeNode.QueueFree();
+		GD.Print($"👋 Employé viré : {empName}");
+	}
+	else
+	{
+		GD.PrintErr($"❌ Aucun employé trouvé avec le nom {empName}");
+	}
+
+	for (int i = 0; i < HiredEmployees.Count; i++)
+		{
+			if (HiredEmployees[i].Name == empName)
+			{
+				HiredEmployees.RemoveAt(i);
+				break;
+			}
+	}
+	
+
+}
+
+
+public void ResetFireFlag()
+{
+	firedToday = false;
+	GD.Print("🔄 Reset de firedToday !");
 }
 
 	

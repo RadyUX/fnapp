@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bnpokhgwn0njq"]
+[gd_scene load_steps=23 format=4 uid="uid://bnpokhgwn0njq"]
 
 [ext_resource type="Script" uid="uid://s808k7lnid1f" path="res://scenes/restaurant/restaurant.gd" id="1_iicbp"]
 [ext_resource type="PackedScene" uid="uid://1ns87l4tsgcy" path="res://scenes/DayAndNightCycleComponent.tscn" id="2_6whu3"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://0wevhdwqdlj2" path="res://scenes/ui/EndOfDayPanel.tscn" id="14_penpo"]
 [ext_resource type="AudioStream" uid="uid://dtjbkcsdmwyk7" path="res://assets/ambiance.mp3" id="16_6gsge"]
 [ext_resource type="PackedScene" uid="uid://nhjqqsko7br5" path="res://scenes/ui/MurderPanel.tscn" id="17_ayhsx"]
+[ext_resource type="PackedScene" uid="uid://djxjo58i216av" path="res://scenes/ui/FireEmployeePanel.tscn" id="18_oonqw"]
 
 [sub_resource type="Gradient" id="Gradient_6whu3"]
 offsets = PackedFloat32Array(0.0178571, 0.125, 0.208333, 0.285714, 1)
@@ -106,11 +107,23 @@ offset_bottom = 370.0
 script = ExtResource("14_6gsge")
 
 [node name="OpenShop" type="Button" parent="Buttons"]
-offset_left = 56.0
-offset_top = 525.0
-offset_right = 231.0
-offset_bottom = 632.0
+offset_left = 30.0
+offset_top = 460.0
+offset_right = 205.0
+offset_bottom = 517.0
 text = "open shop"
+
+[node name="OpenFirePanel" type="Button" parent="Buttons"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -115.0
+offset_right = 203.0
+offset_bottom = -59.0
+grow_vertical = 0
+toggle_mode = true
+text = "Fire employee"
 
 [node name="EndOfDayPanel" parent="." instance=ExtResource("14_penpo")]
 
@@ -120,3 +133,5 @@ text = "open shop"
 stream = ExtResource("16_6gsge")
 
 [node name="MurderPanel" parent="." instance=ExtResource("17_ayhsx")]
+
+[node name="FireEmployeePanel" parent="." instance=ExtResource("18_oonqw")]

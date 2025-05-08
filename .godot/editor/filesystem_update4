@@ -28,3 +28,6 @@ res://scenes/employees/Cooker.cs
 res://scripts/core/GameManager.cs
 res://scripts/DayAndNightCycleManager.cs
 res://scenes/ui/MurderPanel.tscn
+res://scenes/ui/FireEmployeePanel.tscn
+res://scenes/ui/fire_employee_panel.gd
+res://scenes/restaurant/buttons.gd

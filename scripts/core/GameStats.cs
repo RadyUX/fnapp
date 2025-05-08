@@ -81,40 +81,38 @@ public partial class GameStats : Node
 
 public void EndOfDay()
 {
-	if (hasEndedToday)
+if (hasEndedToday)
 	{
 		GD.Print("⏱ EndOfDay() déjà appelé !");
 		return;
 	}
 	hasEndedToday = true;
-
-	// ⏳ FIN DE JOURNÉE ICI
+	CheckMurderRisk();
+	// 🔁 Recalcul des stats
 	RecalculateStats();
-	
 
+	// 🧾 Calcule revenus & pertes
 	DailyGross = DailyRevenue;
 	int taxes = GetTaxes();
 	DailyMalus = PopularityLoss;
 	DailyNet = DailyGross - taxes - DailyMalus;
-	DailyNet = Mathf.Max(DailyNet, 0);
 
-	Money -= taxes;
+	GD.Print($"📊 Calcul ➤ Brut {DailyGross}€, Taxes -{taxes}€, Malus -{DailyMalus}€ ➤ Net {DailyNet}€");
+
+	// ✅ Applique le revenu net au portefeuille
 	Money += DailyNet;
 
-int lossMoney = PopularityLoss * 2;
-Money -= lossMoney;
-DailyNet -= lossMoney; // refléter la vraie perte dans le résumé
+	GD.Print($"💼 Wallet final : {Money}€");
+	GD.Print($"📅 Fin du jour ! Popularité : {Popularity}, Sécurité : {Safety}");
 
-GD.Print($"😖 Popularité -{PopularityLoss} ➜ Perte d'argent : -{lossMoney}€");
-
-
-	GD.Print($"📅 Fin du jour !\n🍕 Revenu : {DailyGross}€\n📉 Malus : {DailyMalus}\n📊 Taxes : -{taxes}€\n💼 Wallet : {Money}€");
-
+	// 🔐 Baisse de sécurité
 	DecreaseSafety();
-	
 
+	// ♻️ Statistiques réajustées après changement
 	RecalculateStats();
-	CheckMurderRisk();
+
+	// ☠️ Risque de meurtre
+
 }
 
 public void ResetDay()
@@ -129,7 +127,7 @@ public void ResetDay()
 public void CheckMurderRisk()
 {
 	int risk = 100 - Safety;
-	int roll = GD.RandRange(0, 99); // ← 0 à 99, pas 0 à 1
+	int roll = GD.RandRange(0, 1); // ← 0 à 99, pas 0 à 1
 	GD.Print($"🎲 Risque de meurtre : {risk}% | Jet : {roll}");
 
 

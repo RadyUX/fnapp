@@ -42,17 +42,14 @@ grow_vertical = 2
 
 [node name="BodyDiscoveredLabel" type="Label" parent="Panel"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -179.5
-offset_top = -23.5
-offset_right = 179.5
-offset_bottom = 18.5
+offset_left = -186.0
+offset_top = 103.0
+offset_right = 186.0
+offset_bottom = 145.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Un corp a été découvert..."
 label_settings = SubResource("LabelSettings_7erp4")
 
@@ -65,18 +62,34 @@ texture = ExtResource("2_rpwcq")
 expand_mode = 1
 
 [node name="Close" type="Button" parent="Panel"]
+modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -55.0
-offset_top = 109.0
-offset_right = 45.0
-offset_bottom = 209.0
+offset_left = -64.0
+offset_top = 238.0
+offset_right = 36.0
+offset_bottom = 338.0
 grow_horizontal = 2
 text = "OK"
-flat = true
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -242.0
+offset_top = -140.5
+offset_right = 249.0
+offset_bottom = -28.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Trop tard pour le sauver... Mais pas pour empêcher le prochain.
+"
 
 [node name="ScreamerAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_h3x3o")
