@@ -317,7 +317,7 @@ public bool firedToday = false;
 public void FireEmployee(Dictionary empData){
 	   if (firedToday)
 	{
-		GD.Print("❌ Déjà licencié un employé aujourd'hui.");
+		GD.Print("❌ Déjà licencié un employé cette semaine");
 		return;
 	}
 

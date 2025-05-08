@@ -9,7 +9,7 @@ public partial class DayAndNightCycleManager : Node
 	public readonly float GAME_MINUTE_DURATION;
 
 	// ⚙️ Paramètres de jeu
-	public float GameSpeed = 15.0f;
+	public float GameSpeed = 150.0f;
 
 	// 🕒 Données initiales
 	public int InitialDay = 1;
@@ -89,24 +89,12 @@ public void setInitialTime()
 	if (hour == 22 && minute == 0)
 	{
 
-		GameStats.Instance.EndOfDay();
+		
 var manager = GetNodeOrNull<EmployeeManager>("/root/EmployeeManager");
 	manager?.RemoveAllEmployees(); 
 		GD.Print("🌙 Il est 22h — on ferme !");
 		
-		var panel = GetTree().CurrentScene.FindChild("EndOfDayPanel", true, false);
-
-if (panel == null)
-{
-	GD.PrintErr("❌ EndOfDayPanel introuvable !");
-}
-else
-{
-	GD.Print("✅ EndOfDayPanel trouvé !");
 	
-	
-	panel.Call("show_summary");
-}
 
 
 var musicPlayer = GetNodeOrNull<AudioStreamPlayer>("/root/Restaurant/ClosingMusicPlayer");
@@ -136,7 +124,7 @@ if (hour == 8 && minute == 0)
 {
 	GD.Print("☀️ Il est 8h du mat !");
 	EmployeeManager.Instance.RespawnAllEmployees();
-	EmployeeManager.Instance.ResetFireFlag();
+	
 	var manager = GetNodeOrNull("/root/EmployeeManager"); // ou ton singleton réel
 	var musicPlayer = GetNodeOrNull<AudioStreamPlayer>("/root/Restaurant/ClosingMusicPlayer");
 	if (musicPlayer != null)

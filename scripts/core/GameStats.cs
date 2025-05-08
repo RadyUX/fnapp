@@ -87,7 +87,7 @@ if (hasEndedToday)
 		return;
 	}
 	hasEndedToday = true;
-	CheckMurderRisk();
+
 	// 🔁 Recalcul des stats
 	RecalculateStats();
 
@@ -111,13 +111,14 @@ if (hasEndedToday)
 	// ♻️ Statistiques réajustées après changement
 	RecalculateStats();
 
-	// ☠️ Risque de meurtre
-
+	
 }
 
 public void ResetDay()
 {
 	hasEndedToday = false;
+
+		PopularityLoss = 0;
 }
 
 	public int GetTaxes()
@@ -126,6 +127,7 @@ public void ResetDay()
 	}
 public void CheckMurderRisk()
 {
+	GD.Print("🧨 [DEBUG] CheckMurderRisk() APPELÉ");
 	int risk = 100 - Safety;
 	int roll = GD.RandRange(0, 1); // ← 0 à 99, pas 0 à 1
 	GD.Print($"🎲 Risque de meurtre : {risk}% | Jet : {roll}");

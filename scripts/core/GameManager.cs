@@ -35,9 +35,40 @@ public partial class GameManager : Node
 	DaysPassed++;
 	GameStats.Instance.DecreaseSafety();
 	GameStats.Instance.ResetDay();
+	
+if (DaysPassed == 2)
+	{
+		GameStats.Instance.CheckMurderRisk();
+		
+	}
+	if (DaysPassed % 7 == 0)
+	{
+		GD.Print("🧨 [DEBUG] CheckMurderRisk() APPELÉ (semaine)");
+		GameStats.Instance.CheckMurderRisk();
+	}
+
+	// ✅ Puis EndOfDay
+	GameStats.Instance.EndOfDay();
 
 
 
+	// 🎬 Affiche le résumé sauf au jour 1
+	var panel = GetTree().CurrentScene.FindChild("EndOfDayPanel", true, false);
+	if (panel == null)
+	{
+		GD.PrintErr("❌ EndOfDayPanel introuvable !");
+	}
+	else
+	{
+		if (DaysPassed == 1)
+		{
+			GD.Print("⏭️ Jour 1, on saute l’affichage du panel");
+			return;
+		}
+
+		GD.Print("✅ EndOfDayPanel trouvé !");
+		panel.Call("show_summary");
+	}
 	
 
 }
