@@ -365,7 +365,19 @@ foreach (string group in groups)
 				break;
 			}
 	}
-	
+	if (empName == possessedEmployeeName)
+{
+	GD.Print("👻 L'hôte du fantôme a été viré ! Il va chercher un nouveau corps...");
+	possessedEmployeeName = ""; // Vide temporairement
+
+	// Repossède quelqu’un d’autre dans la semaine
+	CallDeferred(nameof(ChoosePossessedEmployee));
+}
+else
+{
+	GameStats.Instance.ApplyPopularityLoss(-10);
+	GD.Print("❌ Mauvais licenciement. Popularité -10.");
+}
 
 }
 
@@ -376,5 +388,23 @@ public void ResetFireFlag()
 	GD.Print("🔄 Reset de firedToday !");
 }
 
-	
- }
+
+
+private string possessedEmployeeName = "";
+
+
+/// À appeler au début de chaque semaine
+public void ChoosePossessedEmployee()
+{
+	if (HiredEmployees.Count == 0)
+	{
+		GD.PrintErr("❌ Aucun employé à posséder !");
+		return;
+	}
+
+	int index = (int)(GD.Randi() % (ulong)HiredEmployees.Count);
+	possessedEmployeeName = HiredEmployees[index].Name;
+	GD.Print($"👻 Possession fantomatique : {possessedEmployeeName}");
+}
+
+}

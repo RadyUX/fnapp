@@ -39,6 +39,8 @@ public partial class GameManager : Node
 if (DaysPassed == 2)
 	{
 		GameStats.Instance.CheckMurderRisk();
+		EmployeeManager.Instance.ChoosePossessedEmployee();
+		GD.Print("👻 Nouvelle semaine ➤ Possession choisie.");
 		
 	}
 	if (DaysPassed % 7 == 0)
@@ -71,6 +73,14 @@ if (DaysPassed == 2)
 	}
 	
 
+
+if (DaysPassed % 7 == 1) // Le jour après un dimanche, début de semaine
+{
+
+		EmployeeManager.Instance.ChoosePossessedEmployee();
+		GD.Print("👻 Nouvelle semaine ➤ Possession choisie.");
+	
+}
 }
 
 private void OnNewDay(int day)

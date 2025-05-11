@@ -78,7 +78,7 @@ cashSound = GetNode<AudioStreamPlayer2D>("CashSound");
 
 	public void FindPizza()
 {
-	GD.Print("🍕 FindPizza() appelé");
+	
 
 	Node2D closestNpc = null;
 	float closestDistance = float.MaxValue;
@@ -114,7 +114,7 @@ cashSound = GetNode<AudioStreamPlayer2D>("CashSound");
 
 	if (closestNpc == null)
 	{
-		GD.Print("❌ Aucun NPC valide trouvé.");
+		
 		return;
 	}
 
@@ -123,7 +123,7 @@ cashSound = GetNode<AudioStreamPlayer2D>("CashSound");
 
 	deliveryTarget = closestNpc;
 	pizzasToCollect = quantity;
-	GD.Print($"🎯 NPC cible : {closestNpc.Name} — Demande : {pizzasToCollect} pizza(s)");
+	
 
 	// ➕ Cherche une pizza dispo
 	foreach (Node node in GetTree().GetNodesInGroup("pizzacuite"))
@@ -226,7 +226,7 @@ cashSound = GetNode<AudioStreamPlayer2D>("CashSound");
 
 private void DeliverToNPC(Node2D npc)
 {
-	GD.Print("🎁 Livraison au NPC : " + npc.Name);
+	
 
 	// Vérifie la commande du NPC
 	string requestedItem = npc.Call("get_request_item_name").AsString();

@@ -11,6 +11,9 @@ func _ready():
 
 func _on_closing_time():
 	open_shop.hide()
+	open_fire_panel.hide()
+	fire_employee_panel.hide()
+	
 
 
 func _on_opening_time():
